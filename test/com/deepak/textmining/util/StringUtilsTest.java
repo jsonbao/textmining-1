@@ -1,4 +1,4 @@
-package textmining;
+package com.deepak.textmining.util;
 
 import static org.junit.Assert.assertEquals;
 
