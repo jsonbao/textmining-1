@@ -1,6 +1,10 @@
 package com.deepak.textmining.util;
 
-import java.math.BigInteger;
+import java.util.Map;
+import java.util.StringTokenizer;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @author Deepak
@@ -8,10 +12,17 @@ import java.math.BigInteger;
  */
 public class StringUtils {
 
-    public BigInteger getWordCount(String string) {
+    /**
+     * Get number of words present in a string. Counts the number of words by excluding the
+     * punctuation marks and any other special characters
+     * 
+     * @param string
+     * @return The number of words in the given @link String}
+     */
+    public Long totalWordCount(String string) {
         long wordCount = 0;
         boolean word = false;
-        int endOfLine = string.length() - 1;
+        Integer endOfLine = string.length() - 1;
 
         for (int i = 0; i < string.length(); i++) {
             //if the character is a letter then set word = true
@@ -27,6 +38,51 @@ public class StringUtils {
                 wordCount++;
             }
         }
-        return BigInteger.valueOf(wordCount);
+        word = false;
+        endOfLine = null;
+        return wordCount;
+    }
+
+    /**
+     * Get number of words present in a string. Counts the number of words by excluding the
+     * punctuation marks and any other special characters
+     * 
+     * @param string
+     *            Array of {@link String}
+     * @return The number of words present in the given array of {@link String}
+     */
+    public Long totalWordCount(String[] string) {
+        long wordCount = 0;
+        for (String str : string) {
+            wordCount += totalWordCount(str).longValue();
+        }
+        return wordCount;
+    }
+
+    /**
+     * Gives a Map with String as Key and the number of occurrences of the string as value
+     * 
+     * @param string
+     *            {@link String} whose similar word count is required
+     * @return {@link ConcurrentMap} which has String as key and the number of occurrences of the
+     *         string as value
+     */
+    public Map<String, AtomicLong> similarWordCount(String string) {
+        ConcurrentMap<String, AtomicLong> wordCount = new ConcurrentHashMap<String, AtomicLong>();
+        StringTokenizer strToken = new StringTokenizer(string.replaceAll("[^a-zA-Z0-9 ]", ""));
+        String currentString = null;
+        while (strToken.hasMoreTokens()) {
+            currentString = strToken.nextToken();
+            if (currentString != null) {
+                if (wordCount.containsKey(currentString)) {
+                    wordCount.get(currentString).addAndGet(1L);
+                } else {
+                    wordCount.put(currentString, new AtomicLong(1));
+                }
+            }
+            currentString = null;
+        }
+        strToken = null;
+        return wordCount;
     }
 }
