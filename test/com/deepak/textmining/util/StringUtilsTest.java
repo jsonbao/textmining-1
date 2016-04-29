@@ -5,8 +5,6 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-import java.util.concurrent.atomic.AtomicLong;
-
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -40,6 +38,20 @@ public class StringUtilsTest {
         assertEquals(1, stringUtils.similarWordCount(str).get("how").intValue());
         assertEquals(2, stringUtils.similarWordCount(str).get("do").intValue());
         assertEquals(1, stringUtils.similarWordCount(str).get("you").intValue());
+    }
+
+    @Test
+    public void testSimilarWordCountArray() {
+        String[] str = { "Hello how do you do! ' ' ", "I am fine how are you " };
+        assertEquals(8, stringUtils.similarWordCount(str).size());
+        assertEquals(1, stringUtils.similarWordCount(str).get("Hello").intValue());
+        assertEquals(2, stringUtils.similarWordCount(str).get("how").intValue());
+        assertEquals(2, stringUtils.similarWordCount(str).get("do").intValue());
+        assertEquals(2, stringUtils.similarWordCount(str).get("you").intValue());
+        assertEquals(1, stringUtils.similarWordCount(str).get("I").intValue());
+        assertEquals(1, stringUtils.similarWordCount(str).get("am").intValue());
+        assertEquals(1, stringUtils.similarWordCount(str).get("fine").intValue());
+        assertEquals(1, stringUtils.similarWordCount(str).get("are").intValue());
     }
 
 }

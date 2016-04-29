@@ -85,4 +85,32 @@ public class StringUtils {
         strToken = null;
         return wordCount;
     }
+
+    /**
+     * Gives a Map with String as Key and the number of occurrences of the string array as value
+     * 
+     * @param string
+     *            Array of {@link String} whose similar word count is required
+     * @return {@link ConcurrentMap} which has String as key and the number of occurrences of the
+     *         string as value
+     */
+    public Map<String, AtomicLong> similarWordCount(String[] string) {
+        ConcurrentMap<String, AtomicLong> wordCount = new ConcurrentHashMap<String, AtomicLong>();
+        for (String str : string) {
+            StringTokenizer strToken = new StringTokenizer(str.replaceAll("[^a-zA-Z0-9 ]", ""));
+            String currentString = null;
+            while (strToken.hasMoreTokens()) {
+                currentString = strToken.nextToken();
+                if (currentString != null) {
+                    if (wordCount.containsKey(currentString)) {
+                        wordCount.get(currentString).addAndGet(1L);
+                    } else {
+                        wordCount.put(currentString, new AtomicLong(1));
+                    }
+                }
+                currentString = null;
+            }
+        }
+        return wordCount;
+    }
 }
