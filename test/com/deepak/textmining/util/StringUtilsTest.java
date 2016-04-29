@@ -54,4 +54,16 @@ public class StringUtilsTest {
         assertEquals(1, stringUtils.similarWordCount(str).get("are").intValue());
     }
 
+    @Test
+    public void testNumberOfSentences() {
+        String string = "Hello.you.Hello.you.Hello.you.Hello.you.Hello.you.";
+        assertEquals(10, stringUtils.numberOfSentences(string));
+    }
+
+    @Test
+    public void testNumberOfSentencesArray() {
+        String[] str = { "Hello.you.Hello.you.", "Hello.you.Hello.you." };
+        assertEquals(8, stringUtils.numberOfSentences(str));
+    }
+
 }

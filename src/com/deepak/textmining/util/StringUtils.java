@@ -1,11 +1,13 @@
 package com.deepak.textmining.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.TreeMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @author Deepak
@@ -64,17 +66,17 @@ public class StringUtils {
      * @return {@link ConcurrentMap} which has String as key and the number of occurrences of the
      *         string as value
      */
-    public Map<String, AtomicLong> similarWordCount(String string) {
-        ConcurrentMap<String, AtomicLong> wordCount = new ConcurrentHashMap<String, AtomicLong>();
+    public Map<String, Long> similarWordCount(String string) {
+        Map<String, Long> wordCount = new HashMap<String, Long>();
         StringTokenizer strToken = new StringTokenizer(string.replaceAll("[^a-zA-Z0-9 ]", ""));
         String currentString = null;
         while (strToken.hasMoreTokens()) {
             currentString = strToken.nextToken();
             if (currentString != null) {
                 if (wordCount.containsKey(currentString)) {
-                    wordCount.get(currentString).addAndGet(1L);
+                    wordCount.put(currentString, wordCount.get(currentString) + 1);
                 } else {
-                    wordCount.put(currentString, new AtomicLong(1));
+                    wordCount.put(currentString, 1L);
                 }
             }
             currentString = null;
@@ -91,7 +93,53 @@ public class StringUtils {
      * @return {@link ConcurrentMap} which has String as key and the number of occurrences of the
      *         string as value
      */
-    public Map<String, AtomicLong> similarWordCount(String[] string) {
+    public Map<String, Long> similarWordCount(String[] string) {
         return similarWordCount(Arrays.toString(string));
     }
+
+    /**
+     * Find the number of sentences in the given {@link String}
+     * 
+     * @param string
+     *            {@link String}
+     * @return Number of sentences in the given {@link String}
+     */
+    public int numberOfSentences(String string) {
+        return new StringTokenizer(string, "[?.]+").countTokens();
+    }
+
+    /**
+     * Find the number of sentences in the given Array of {@link String}
+     * 
+     * @param string
+     *            Array of {@link String}
+     * @return Number of sentences in the given Array of {@link String}
+     */
+    public int numberOfSentences(String[] string) {
+        return numberOfSentences(Arrays.toString(string));
+    }
+
+    public Map<String, Long> sizeOfWords(String string, int size) {
+        Map<String, Long> map = similarWordCount(string);
+        List<String> str = new ArrayList<>();
+        for (Map.Entry<String, Long> mapEntry : map.entrySet()) {
+            if (mapEntry.getKey().length() != size) {
+                str.add(mapEntry.getKey());
+            }
+        }
+        for (String st : str) {
+            map.remove(st);
+        }
+        TreeMap<String, Long> newMap = new TreeMap<String, Long>();
+        newMap.putAll(map);
+        map = null;
+        str = null;
+        return newMap;
+    }
+
+    public static void main(String[] args) {
+        StringUtils st = new StringUtils();
+        System.out.println(st.sizeOfWords("Hi aa How Are you. I Am ba Ba AA fine how are you?", 2));
+    }
+
 }
