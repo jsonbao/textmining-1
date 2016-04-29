@@ -1,5 +1,6 @@
 package com.deepak.textmining.util;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.concurrent.ConcurrentHashMap;
@@ -17,7 +18,7 @@ public class StringUtils {
      * punctuation marks and any other special characters
      * 
      * @param string
-     * @return The number of words in the given @link String}
+     * @return The number of words in the given {@link String}
      */
     public Long totalWordCount(String string) {
         long wordCount = 0;
@@ -52,11 +53,7 @@ public class StringUtils {
      * @return The number of words present in the given array of {@link String}
      */
     public Long totalWordCount(String[] string) {
-        long wordCount = 0;
-        for (String str : string) {
-            wordCount += totalWordCount(str).longValue();
-        }
-        return wordCount;
+        return totalWordCount(Arrays.toString(string));
     }
 
     /**
@@ -95,22 +92,6 @@ public class StringUtils {
      *         string as value
      */
     public Map<String, AtomicLong> similarWordCount(String[] string) {
-        ConcurrentMap<String, AtomicLong> wordCount = new ConcurrentHashMap<String, AtomicLong>();
-        for (String str : string) {
-            StringTokenizer strToken = new StringTokenizer(str.replaceAll("[^a-zA-Z0-9 ]", ""));
-            String currentString = null;
-            while (strToken.hasMoreTokens()) {
-                currentString = strToken.nextToken();
-                if (currentString != null) {
-                    if (wordCount.containsKey(currentString)) {
-                        wordCount.get(currentString).addAndGet(1L);
-                    } else {
-                        wordCount.put(currentString, new AtomicLong(1));
-                    }
-                }
-                currentString = null;
-            }
-        }
-        return wordCount;
+        return similarWordCount(Arrays.toString(string));
     }
 }
