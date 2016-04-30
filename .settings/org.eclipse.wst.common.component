@@ -7,6 +7,7 @@
         <wb-resource deploy-path="/" source-path="/test"/>
         <wb-resource deploy-path="/" source-path="/test-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/webapp"/>
         <property name="context-root" value="textmining"/>
         <property name="java-output-path" value="/textmining/target/classes"/>
     </wb-module>

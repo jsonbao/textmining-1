@@ -1,5 +1,7 @@
 package com.deepak.textmining.controller;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -9,7 +11,9 @@ import com.deepak.textmining.util.StringUtils;
 
 @ManagedBean
 @SessionScoped
-public class TextMiningController {
+public class TextMiningController implements Serializable {
+
+    private static final long serialVersionUID = 8232953245163786969L;
 
     private StringUtils stringUtils;
 
@@ -19,8 +23,23 @@ public class TextMiningController {
 
     private String stringToBeTested = "";
 
-    public void apply() {
+    private boolean showResult = false;
 
+    public void clear() {
+        showResult = false;
+        stringToBeTested = "";
+    }
+
+    public void apply() {
+        showResult = true;
+    }
+
+    public Long totalWordCount() {
+        return stringUtils.totalWordCount(getStringToBeTested());
+    }
+
+    public int numberOfSentences() {
+        return stringUtils.numberOfSentences(getStringToBeTested());
     }
 
     public StringUtils getStringUtils() {
@@ -39,6 +58,10 @@ public class TextMiningController {
         return stringToBeTested;
     }
 
+    public boolean isShowResult() {
+        return showResult;
+    }
+
     public void setStringUtils(StringUtils stringUtils) {
         this.stringUtils = stringUtils;
     }
@@ -53,5 +76,9 @@ public class TextMiningController {
 
     public void setStringToBeTested(String stringToBeTested) {
         this.stringToBeTested = stringToBeTested;
+    }
+
+    public void setShowResult(boolean showResult) {
+        this.showResult = showResult;
     }
 }
