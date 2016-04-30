@@ -6,3 +6,6 @@ A Utility class to fetch all information related to a String
 	
 	POSUtil
 A utility class to know the Parts of Speech of words
+
+	MapUtils
+A Utility class to get map details and compare maps to get common and uncommon keysets and many more
