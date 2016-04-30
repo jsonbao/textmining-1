@@ -7,8 +7,12 @@
 						http://www.springframework.org/schema/context/spring-context.xsd
 						http://www.springframework.org/schema/web-services
       					http://www.springframework.org/schema/web-services/web-services.xsd">
-	
-	<import resource="POSwiring.xml" />
-	<import resource="controllers.xml"/>
+
+	<bean id="textMiningController" class="com.deepak.textmining.controller.TextMiningController"
+		scope="session">
+		<property name="mapUtils" ref="mapUtils" />
+		<property name="posUtil" ref="posUtil" />
+		<property name="stringUtils" ref="stringUtils" />
+	</bean>
 
 </beans>

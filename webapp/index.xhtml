@@ -4,15 +4,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:dsp="http://java.sun.com/jsf/composite/components"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
 	<title>Text Mining</title>
+	<h:outputStylesheet library="css" name="main.css" />
 </h:head>
 
 <h:body>
+
+	<h:form>
+		<h:inputTextarea id="mainString"
+			value="#{textMiningController.stringToBeTested}" cols="100" rows="10" styleClass="unresizable"/>
+			
+		<h:commandButton value="Submit" action="#{textMiningController.apply}" />
+	</h:form>
 
 </h:body>
 </html>
