@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/web-services
+						http://www.springframework.org/schema/web-services/web-services.xsd
+						http://www.springframework.org/schema/util
+						http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<util:map>
+		<!-- Clause Level -->
+		<entry key="S" value="simple declarative clause, i.e. one that is not introduced by a (possible empty) subordinating conjunction or a wh-word and that does not exhibit subject-verb inversion." />
+		<entry key="SBAR" value="Clause introduced by a (possibly empty) subordinating conjunction."/>
+		<entry key="SBARQ" value=" Direct question introduced by a wh-word or a wh-phrase. Indirect questions and relative clauses should be bracketed as SBAR, not SBARQ." />
+		<entry key="SINV" value="Inverted declarative sentence, i.e. one in which the subject follows the tensed verb or modal."/>
+		<entry key="SQ" value="Inverted yes/no question, or main clause of a wh-question, following the wh-phrase in SBARQ."/>
+		<!-- Phrase Level -->
+		<entry key="ADJP" value="Adjective Phrase."/>
+		<entry key="ADVP" value="Adverb Phrase."/>
+		<entry key="CONJP" value="Conjunction Phrase."/>
+		<entry key="FRAG" value="Fragment."/>
+		<entry key="INTJ" value="Interjection. Corresponds approximately to the part-of-speech tag UH."/>
+		<entry key="LST" value="List marker. Includes surrounding punctuation."/>
+		<entry key="NAC" value="Not a Constituent; used to show the scope of certain prenominal modifiers within an NP."/>
+		<entry key="NP" value="Noun Phrase. "/>
+		<entry key="NX" value="Used within certain complex NPs to mark the head of the NP. Corresponds very roughly to N-bar level but used quite differently."/>
+		<entry key="PP" value="Prepositional Phrase."/>
+		<entry key="PRN" value="Parenthetical. "/>
+		<entry key="PRT" value="Particle. Category for words that should be tagged RP."/> 
+		<entry key="QP" value="Quantifier Phrase (i.e. complex measure/amount phrase); used within NP."/>
+		<entry key="RRC" value="Reduced Relative Clause. "/>
+		<entry key="UCP" value="Unlike Coordinated Phrase. "/>
+		<entry key="VP" value="Vereb Phrase. "/>
+		<entry key="WHADJP" value="Wh-adjective Phrase. Adjectival phrase containing a wh-adverb, as in how hot."/>
+		<entry key="WHAVP" value="Wh-adverb Phrase. Introduces a clause with an NP gap. May be null (containing the 0 complementizer) or lexical, containing a wh-adverb such as how or why."/>
+		<entry key="WHNP" value="Wh-noun Phrase. Introduces a clause with an NP gap. May be null (containing the 0 complementizer) or lexical, containing some wh-word, e.g. who, which book, whose daughter, none of which, or how many leopards."/>
+		<entry key="WHPP" value="Wh-prepositional Phrase. Prepositional phrase containing a wh-noun phrase (such as of which or by whose authority) that either introduces a PP gap or is contained by a WHNP."/>
+		<entry key="X" value="Unknown, uncertain, or unbracketable. X is often used for bracketing typos and in bracketing the...the-constructions."/>
+		<!-- Word level -->
+		<entry key="CC" value="Coordinating conjunction"/>
+		<entry key="CD" value="Cardinal number"/>
+		<entry key="DT" value="Determiner"/>
+		<entry key="EX" value="Existential there"/>
+		<entry key="FW" value="Foreign word"/>
+		<entry key="IN" value="Preposition or subordinating conjunction"/>
+		<entry key="JJ" value="Adjective"/>
+		<entry key="JJR" value="Adjective, comparative"/>
+		<entry key="JJS" value="Adjective, superlative"/>
+		<entry key="LS" value="List item marker"/>
+		<entry key="MD" value="Modal"/>
+		<entry key="NN" value="Noun, singular or mass"/>
+		<entry key="NNS" value="Noun, plural"/>
+		<entry key="NNP" value="Proper noun, singular"/>
+		<entry key="NNPS" value="Proper noun, plural"/>
+		<entry key="PDT" value="Predeterminer"/>
+		<entry key="POS" value="Possessive ending"/>
+		<entry key="PRP" value="Personal pronoun"/>
+		<entry key="PRP$" value="Possessive pronoun"/>
+		<entry key="PRP-S" value="Possessive pronoun"/>
+		<entry key="RB" value="Adverb"/>
+		<entry key="RBR" value="Adverb, comparative"/>
+		<entry key="RBS" value="Adverb, superlative"/>
+		<entry key="RP" value="Particle"/>
+		<entry key="SYM" value="Symbol"/>
+		<entry key="TO" value="to"/>
+		<entry key="UH" value="Interjection"/>
+		<entry key="VB" value="Verb, base form"/>
+		<entry key="VBD" value="Verb, past tense"/>
+		<entry key="VBG" value="Verb, gerund or present participle"/>
+		<entry key="VBN" value="Verb, past participle"/>
+		<entry key="VBP" value="Verb, non-3rd person singular present"/>
+		<entry key="VBZ" value="Verb, 3rd person singular present"/>
+		<entry key="WDT" value="Wh-determiner"/>
+		<entry key="WP" value="Wh-pronoun"/>
+		<entry key="WP$" value="Possessive wh-pronoun"/>
+		<entry key="WP-S" value="Possessive wh-pronoun"/>
+		<entry key="WRB" value="Wh-adverb"/>
+		<!-- Function tags -->
+		<entry key="ADV" value="adverbial"/>
+		<entry key="NOM" value="nominal"/>  
+		<!-- Grammatical role -->
+		<entry key="DTV" value="dative" ></entry>
+		<entry key="LGS" value="logical subject"/>
+		<entry key="PRD" value="predicate"/>
+		<entry key="SBJ" value="surface subjec"/>
+		<entry key="TPC" value="topicalized"/>
+		<entry key="VOC" value="vocative"/>
+		<!-- Adverbials -->
+		<entry key="BNF" value="benefactive"/>
+		<entry key="DIR" value="direction"/>
+		<entry key="EXT" value="extent"/> 
+		<entry key="LOC" value="locative"/> 
+		<entry key="MNR" value="manner"/>
+		<entry key="PRP" value="purpose or reason"/>
+		<entry key="TMP" value="temporal"/>
+		<!-- Miscellaneous -->
+		<entry key="CLR" value="closely related"/>
+		<entry key="CLF" value="cleft"/>
+		<entry key="HLN" value="headline"/>
+		<entry key="TTL" value="title"/>
+	</util:map>
+
+</beans>

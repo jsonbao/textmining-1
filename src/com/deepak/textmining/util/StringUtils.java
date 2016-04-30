@@ -1,5 +1,7 @@
 package com.deepak.textmining.util;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -8,6 +10,9 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentMap;
+
+import opennlp.tools.sentdetect.SentenceDetectorME;
+import opennlp.tools.sentdetect.SentenceModel;
 
 /**
  * @author Deepak
@@ -138,8 +143,15 @@ public class StringUtils {
     }
 
     public static void main(String[] args) {
-        StringUtils st = new StringUtils();
-        System.out.println(st.sizeOfWords("Hi aa How Are you. I Am ba Ba AA fine how are you?", 2));
+        try {
+            ClassLoader cl = Thread.currentThread().getContextClassLoader();
+            SentenceModel sm = new SentenceModel(new FileInputStream("/test-resources/test.txt"));
+            SentenceDetectorME sde = new SentenceDetectorME(sm);
+            System.out.println(sde.sentDetect("Hi aa How Are you. I Am ba Ba AA fine how are you?"));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
 }
