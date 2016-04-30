@@ -10,8 +10,16 @@
 						http://www.springframework.org/schema/web-services/web-services.xsd
 						http://www.springframework.org/schema/util
 						http://www.springframework.org/schema/util/spring-util.xsd">
-
-	<util:map>
+	
+	<bean id="tokenizerModelURL" class="java.net.URL">
+		<constructor-arg value="http://opennlp.sourceforge.net/models-1.5/en-token.bin" />
+	</bean>
+	
+	<bean id="posModelURL" class="java.net.URL">
+		<constructor-arg value="http://opennlp.sourceforge.net/models-1.5/en-pos-maxent.bin" />
+	</bean>
+	
+	<util:map id="posMap">
 		<!-- Clause Level -->
 		<entry key="S" value="simple declarative clause, i.e. one that is not introduced by a (possible empty) subordinating conjunction or a wh-word and that does not exhibit subject-verb inversion." />
 		<entry key="SBAR" value="Clause introduced by a (possibly empty) subordinating conjunction."/>

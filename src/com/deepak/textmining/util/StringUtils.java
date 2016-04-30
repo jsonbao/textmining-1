@@ -1,7 +1,5 @@
 package com.deepak.textmining.util;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -10,9 +8,6 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentMap;
-
-import opennlp.tools.sentdetect.SentenceDetectorME;
-import opennlp.tools.sentdetect.SentenceModel;
 
 /**
  * @author Deepak
@@ -46,7 +41,6 @@ public class StringUtils {
                 wordCount++;
             }
         }
-        word = false;
         endOfLine = null;
         return wordCount;
     }
@@ -86,6 +80,7 @@ public class StringUtils {
             }
             currentString = null;
         }
+        currentString = null;
         strToken = null;
         return wordCount;
     }
@@ -124,6 +119,15 @@ public class StringUtils {
         return numberOfSentences(Arrays.toString(string));
     }
 
+    /**
+     * Fetch words based on required size
+     * 
+     * @param string
+     *            String from which words are to be extracted
+     * @param size
+     *            size of words requried
+     * @return {@link Map} of words with required and the number of times repeated
+     */
     public Map<String, Long> sizeOfWords(String string, int size) {
         Map<String, Long> map = similarWordCount(string);
         List<String> str = new ArrayList<>();
@@ -142,16 +146,17 @@ public class StringUtils {
         return newMap;
     }
 
-    public static void main(String[] args) {
-        try {
-            ClassLoader cl = Thread.currentThread().getContextClassLoader();
-            SentenceModel sm = new SentenceModel(new FileInputStream("/test-resources/test.txt"));
-            SentenceDetectorME sde = new SentenceDetectorME(sm);
-            System.out.println(sde.sentDetect("Hi aa How Are you. I Am ba Ba AA fine how are you?"));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+    /**
+     * Fetch words based on required size
+     * 
+     * @param string
+     *            Array of {@link String} from which words are to be extracted
+     * @param size
+     *            size of words required
+     * @return {@link Map} of words with required and the number of times repeated
+     */
+    public Map<String, Long> sizeOfWords(String[] string, int size) {
+        return sizeOfWords(Arrays.toString(string), size);
     }
 
 }

@@ -7,9 +7,11 @@ import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -26,6 +28,15 @@ public class StringUtilsTest {
 
     @Resource
     private StringUtils stringUtils;
+
+    @Resource
+    private Map<String, String> posMap;
+
+    @Resource
+    private URL tokenizerModelURL;
+
+    @Resource
+    private URL posModelURL;
 
     @Test
     public void testGetWordCountString() {
@@ -75,14 +86,22 @@ public class StringUtilsTest {
     }
 
     @Test
+    public void testSizeOfWords() {
+        String string = "Hello how are you? I am fine. How about you? Me too.";
+        assertEquals(2, stringUtils.sizeOfWords(string, 2).size());
+        assertThat(1L, is(equalTo(stringUtils.sizeOfWords(string, 2).get("am"))));
+        assertThat(1L, is(equalTo(stringUtils.sizeOfWords(string, 2).get("Me"))));
+    }
+
+    @Test
+    @Ignore
     public void dummy() {
         try {
-            TokenizerModel tokModel = new TokenizerModel(
-                    new URL("http://opennlp.sourceforge.net/models-1.5/en-token.bin"));
+            TokenizerModel tokModel = new TokenizerModel(tokenizerModelURL);
             TokenizerME tokenizer = new TokenizerME(tokModel);
             String[] stringTokens = tokenizer.tokenize("Hello How are you Deepak?I am Fine.");
 
-            POSModel posModel = new POSModel(new URL("http://opennlp.sourceforge.net/models-1.5/en-pos-maxent.bin"));
+            POSModel posModel = new POSModel(posModelURL);
             POSTaggerME posTagger = new POSTaggerME(posModel);
             String[] posTags = posTagger.tag(stringTokens);
             for (String string : posTags) {
@@ -91,6 +110,7 @@ public class StringUtilsTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println(posMap.keySet());
     }
 
 }
