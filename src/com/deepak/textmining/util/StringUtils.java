@@ -128,7 +128,7 @@ public class StringUtils {
      *            size of words requried
      * @return {@link Map} of words with required and the number of times repeated
      */
-    public Map<String, Long> sizeOfWords(String string, int size) {
+    public Map<String, Long> fetchWordsBasedOnSize(String string, int size) {
         Map<String, Long> map = similarWordCount(string);
         List<String> str = new ArrayList<>();
         for (Map.Entry<String, Long> mapEntry : map.entrySet()) {
@@ -155,8 +155,8 @@ public class StringUtils {
      *            size of words required
      * @return {@link Map} of words with required and the number of times repeated
      */
-    public Map<String, Long> sizeOfWords(String[] string, int size) {
-        return sizeOfWords(Arrays.toString(string), size);
+    public Map<String, Long> fetchWordsBasedOnSize(String[] string, int size) {
+        return fetchWordsBasedOnSize(Arrays.toString(string), size);
     }
 
 }

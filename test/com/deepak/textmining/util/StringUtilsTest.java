@@ -88,11 +88,11 @@ public class StringUtilsTest {
     }
 
     @Test
-    public void testSizeOfWords() {
-        String[] string = { "Hello how are you?", "I am fine. How about you?", "Me too." };
-        assertEquals(2, stringUtils.sizeOfWords(string, 2).size());
-        assertThat(1L, is(equalTo(stringUtils.sizeOfWords(string, 2).get("am"))));
-        assertThat(1L, is(equalTo(stringUtils.sizeOfWords(string, 2).get("Me"))));
-    }
+        public void testFetchWordsBasedOnSize() {
+            String[] string = { "Hello how are you?", "I am fine. How about you?", "Me too." };
+            assertEquals(2, stringUtils.fetchWordsBasedOnSize(string, 2).size());
+            assertThat(1L, is(equalTo(stringUtils.fetchWordsBasedOnSize(string, 2).get("am"))));
+            assertThat(1L, is(equalTo(stringUtils.fetchWordsBasedOnSize(string, 2).get("Me"))));
+        }
 
 }

@@ -19,5 +19,7 @@
 		<property name="posTaggerME" ref="posTaggerME" />
 		<property name="posMap" ref="posMap" />
 	</bean>
+	
+	<bean id="mapUtils" class="com.deepak.textmining.util.MapUtils" />
 
 </beans>
