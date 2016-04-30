@@ -19,6 +19,22 @@
 		<constructor-arg value="http://opennlp.sourceforge.net/models-1.5/en-pos-maxent.bin" />
 	</bean>
 	
+	<bean id="tokenizerModel" class="opennlp.tools.tokenize.TokenizerModel">
+		<constructor-arg ref="tokenizerModelURL" />
+	</bean>
+	
+	<bean id="tokenizerME" class="opennlp.tools.tokenize.TokenizerME">
+		<constructor-arg ref="tokenizerModel" />
+	</bean>
+	
+	<bean id="posModel" class="opennlp.tools.postag.POSModel">
+		<constructor-arg ref="posModelURL" />
+	</bean>
+	
+	<bean id="posTaggerME" class="opennlp.tools.postag.POSTaggerME">
+		<constructor-arg ref="posModel" />
+	</bean>
+	
 	<util:map id="posMap">
 		<!-- Clause Level -->
 		<entry key="S" value="simple declarative clause, i.e. one that is not introduced by a (possible empty) subordinating conjunction or a wh-word and that does not exhibit subject-verb inversion." />

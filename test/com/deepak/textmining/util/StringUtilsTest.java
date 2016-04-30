@@ -5,22 +5,18 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import opennlp.tools.postag.POSModel;
 import opennlp.tools.postag.POSTaggerME;
 import opennlp.tools.tokenize.TokenizerME;
-import opennlp.tools.tokenize.TokenizerModel;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:/spring/applicationContext.xml" })
@@ -37,6 +33,12 @@ public class StringUtilsTest {
 
     @Resource
     private URL posModelURL;
+
+    @Resource
+    private TokenizerME tokenizerME;
+
+    @Resource
+    private POSTaggerME posTaggerME;
 
     @Test
     public void testGetWordCountString() {
@@ -87,30 +89,10 @@ public class StringUtilsTest {
 
     @Test
     public void testSizeOfWords() {
-        String string = "Hello how are you? I am fine. How about you? Me too.";
+        String[] string = { "Hello how are you?", "I am fine. How about you?", "Me too." };
         assertEquals(2, stringUtils.sizeOfWords(string, 2).size());
         assertThat(1L, is(equalTo(stringUtils.sizeOfWords(string, 2).get("am"))));
         assertThat(1L, is(equalTo(stringUtils.sizeOfWords(string, 2).get("Me"))));
-    }
-
-    @Test
-    @Ignore
-    public void dummy() {
-        try {
-            TokenizerModel tokModel = new TokenizerModel(tokenizerModelURL);
-            TokenizerME tokenizer = new TokenizerME(tokModel);
-            String[] stringTokens = tokenizer.tokenize("Hello How are you Deepak?I am Fine.");
-
-            POSModel posModel = new POSModel(posModelURL);
-            POSTaggerME posTagger = new POSTaggerME(posModel);
-            String[] posTags = posTagger.tag(stringTokens);
-            for (String string : posTags) {
-                System.out.println(string);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println(posMap.keySet());
     }
 
 }
