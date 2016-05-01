@@ -1,13 +1,55 @@
-body{
-	margin: 0px;
+body {
+	margin: 0%;
 	background-color: #F6F6F6;
+	width: 100%;
 }
-.textminingform{
-	
+
+.textminingform {
+	width: 100%;
 }
-.unresizable{
+
+.textAnalysisCentre {
 	resize: none;
+	margin: 3% 23% 2%;
 }
-.submit_button{
+
+.submit_button {
+	display: inline-block;
+	margin: 0% 3%;
 	border-radius: 4px;
+}
+
+.reset_button {
+	display: inline-block;
+	margin: 0% 3%;
+	border-radius: 4px;
+}
+
+.oneLineButtons {
+	padding: 1% 44%;
+	align-content: space-around;
+}
+
+.leftEndTable {
+	border: 1px solid;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+.numberOfTable td, th {
+	border: 1px solid black;
+}
+
+.numberOfTable th {
+	text-align: center;
+}
+
+.numberOfTable td {
+	text-align: left;
+}
+
+.resultPanel {
+	margin: 0% 3%;
 }

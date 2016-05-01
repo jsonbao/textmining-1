@@ -31,14 +31,17 @@ public class TextMiningController implements Serializable {
     }
 
     public void apply() {
-        showResult = true;
+        //Checks if there are only spaces been given as input
+        if (!getStringToBeTested().trim().isEmpty()) {
+            showResult = true;
+        }
     }
 
-    public Long totalWordCount() {
+    public Long getTotalWordCount() {
         return stringUtils.totalWordCount(getStringToBeTested());
     }
 
-    public int numberOfSentences() {
+    public int getNumberOfSentences() {
         return stringUtils.numberOfSentences(getStringToBeTested());
     }
 

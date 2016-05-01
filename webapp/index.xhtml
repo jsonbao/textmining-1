@@ -16,21 +16,37 @@
 
 	<h:form styleClass="textminingform">
 		<h:inputTextarea id="mainString"
+			requiredMessage="Text required in the box"
 			value="#{textMiningController.stringToBeTested}" cols="100" rows="10"
-			styleClass="unresizable" />
-
-		<h:commandButton value="Submit" action="#{textMiningController.apply}"
-			styleClass="submit_button" />
-		<h:commandButton value="Reset" action="#{textMiningController.clear}"
-			styleClass="submit_button" />
+			styleClass="textAnalysisCentre">
+			<f:ajax event="keyup" render="submitButton resetButton" />
+		</h:inputTextarea>
+		<div class="oneLineButtons">
+			<h:commandButton value="Submit" id="submitButton"
+				disabled="#{empty textMiningController.stringToBeTested}"
+				action="#{textMiningController.apply}" styleClass="submit_button" />
+			<h:commandButton value="Reset" id="resetButton"
+				disabled="#{empty textMiningController.stringToBeTested}"
+				action="#{textMiningController.clear}" styleClass="reset_button" />
+		</div>
 	</h:form>
 
-	<h:panelGroup rendered="#{textMiningController.showResult}">
-		Number of Words: <h:outputText
-			value="#{textMiningController.totalWordCount()}" /><br/>
-		Number Of Sentences: <h:outputText
-			value="#{textMiningController.numberOfSentences()}" />
+	<h:panelGroup rendered="#{textMiningController.showResult}"
+		layout="block" styleClass="resultPanel">
+		<table class="numberOfTable">
+			<tr>
+				<th>Total Number of</th>
+				<th></th>
+			</tr>
+			<tr>
+				<td>Words</td>
+				<td>#{textMiningController.totalWordCount}</td>
+			</tr>
+			<tr>
+				<td>Sentences</td>
+				<td>#{textMiningController.numberOfSentences}</td>
+			</tr>
+		</table>
 	</h:panelGroup>
-
 </h:body>
 </html>
