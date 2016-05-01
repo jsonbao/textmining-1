@@ -31,11 +31,9 @@ body {
 
 .oneLineButtons {
 	padding: 1% 44%;
-	align-content: space-around;
 }
 
 table {
-	/* 	border-collapse: collapse; */
 	
 }
 
@@ -48,28 +46,28 @@ table {
 }
 
 #numberOfTableDiv {
-	width: 10%;
+	
 }
 
 #wordCountTableDiv {
-	width: 20%;
+	
 }
 
 #posListTableDiv {
-	width: 20%;
+	
 }
 
 .numberOfTable {
 	border: 1px solid black;
-	margin: 1%;
+	margin: auto;
 }
 
 .wordCountTable {
 	border: 1px solid black;
-	margin: 1%;
+	margin: auto;
 }
 
 .posListTable {
 	border: 1px solid black;
-	margin: 1%;
+	margin: auto;
 }
