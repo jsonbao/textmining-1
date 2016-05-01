@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich">
 
 <h:head>
 	<title>Text Mining</title>
@@ -18,7 +19,7 @@
 		<h:inputTextarea id="mainString"
 			requiredMessage="Text required in the box"
 			value="#{textMiningController.stringToBeTested}" cols="100" rows="10"
-			styleClass="textAnalysisCentre">
+			styleClass="textAnalysisTextArea">
 			<f:ajax event="keyup" render="submitButton resetButton" />
 		</h:inputTextarea>
 		<div class="oneLineButtons">
@@ -32,47 +33,66 @@
 	</h:form>
 
 	<h:panelGroup rendered="#{textMiningController.showResult}"
-		layout="block" styleClass="resultPanel">
-		<table class="numberOfTable" id="totalNumberOf">
-			<tr>
-				<th>Total Number of</th>
-				<th></th>
-			</tr>
-			<tr>
-				<td>Words</td>
-				<td title="Total number of words">#{textMiningController.totalWordCount}</td>
-			</tr>
-			<tr>
-				<td>Sentences</td>
-				<td title="Total number of sentences">#{textMiningController.numberOfSentences}</td>
-			</tr>
-		</table>
+		layout="block" id="resultPanel">
+		<rich:tabPanel switchType="client" id="textAnalysisTab"
+			styleClass="textAnalysisC" title="Text Analysis in Detail">
 
-		<h:dataTable styleClass="numberOfTable" id="similarWordCount"
-			value="#{textMiningController.similarWordCount.entrySet()}"
-			var="entry">
-			<h:column>
-				<f:facet name="header">Word</f:facet>
-				<h:outputText value="#{entry.key}" title="#{entry.key}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Count</f:facet>
-				<h:outputText value="#{entry.value}" title="#{entry.value}" />
-			</h:column>
-		</h:dataTable>
+			<rich:tab name="Number Count" styleClass="nctabC" id="nctab">
+				<div id="numberOfTableDiv">
+					<table class="numberOfTable" id="totalNumberOf">
+						<tr>
+							<th>Total Number of</th>
+							<th></th>
+						</tr>
+						<tr>
+							<td>Words</td>
+							<td title="Total number of words">#{textMiningController.totalWordCount}</td>
+						</tr>
+						<tr>
+							<td>Sentences</td>
+							<td title="Total number of sentences">#{textMiningController.numberOfSentences}</td>
+						</tr>
+					</table>
+				</div>
+			</rich:tab>
 
-		<h:dataTable styleClass="numberOfTable" id="posTable"
-			value="#{textMiningController.posDetect.entrySet()}" var="entry">
-			<h:column>
-				<f:facet name="header">Word</f:facet>
-				<h:outputText value="#{entry.key}" title="#{entry.key}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">POS</f:facet>
-				<h:outputText value="#{entry.value[0]}" title="#{entry.value[1]}" />
-			</h:column>
-		</h:dataTable>
+			<rich:tab id="swctab" styleClass="swctabC"
+				title="List of similar words with the number of times repeated"
+				name="Similar Word Count">
+				<div id="wordCountTableDiv">
+					<h:dataTable styleClass="wordCountTable" id="similarWordCount"
+						value="#{textMiningController.similarWordCount.entrySet()}"
+						var="entry">
+						<h:column headerClass="tableHeader">
+							<f:facet name="header">Word</f:facet>
+							<h:outputText value="#{entry.key}" title="#{entry.key}" />
+						</h:column>
+						<h:column headerClass="tableHeader">
+							<f:facet name="header">Count</f:facet>
+							<h:outputText value="#{entry.value}" title="#{entry.value}" />
+						</h:column>
+					</h:dataTable>
+				</div>
+			</rich:tab>
 
+			<rich:tab id="postab" title="Parts of Speech of all the letters"
+				styleClass="postabCls" name="POS">
+				<div id="posListTableDiv">
+					<h:dataTable styleClass="posListTable" id="posTable"
+						value="#{textMiningController.posDetect.entrySet()}" var="entry">
+						<h:column headerClass="tableHeader">
+							<f:facet name="header">Word</f:facet>
+							<h:outputText value="#{entry.key}" title="#{entry.key}" />
+						</h:column>
+						<h:column headerClass="tableHeader">
+							<f:facet name="header">POS</f:facet>
+							<h:outputText value="#{entry.value[0]}" title="#{entry.value[1]}" />
+						</h:column>
+					</h:dataTable>
+				</div>
+			</rich:tab>
+		</rich:tabPanel>
 	</h:panelGroup>
+
 </h:body>
 </html>

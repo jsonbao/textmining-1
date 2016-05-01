@@ -8,7 +8,11 @@ body {
 	width: 100%;
 }
 
-.textAnalysisCentre {
+#textAnalysisTab {
+	
+}
+
+.textAnalysisTextArea {
 	resize: none;
 	margin: 3% 23% 2%;
 }
@@ -30,27 +34,42 @@ body {
 	align-content: space-around;
 }
 
-.leftEndTable {
-	border: 1px solid;
-}
-
 table {
-	border-collapse: collapse;
+	/* 	border-collapse: collapse; */
+	
 }
 
-.numberOfTable td, th {
+#resultPanel {
+	padding: 0% 2%;
+}
+
+#resultPanelRowOne div {
+	float: left;
+}
+
+#numberOfTableDiv {
+	width: 10%;
+}
+
+#wordCountTableDiv {
+	width: 20%;
+}
+
+#posListTableDiv {
+	width: 20%;
+}
+
+.numberOfTable {
 	border: 1px solid black;
+	margin: 1%;
 }
 
-.numberOfTable th {
-	text-align: center;
+.wordCountTable {
+	border: 1px solid black;
+	margin: 1%;
 }
 
-.numberOfTable td {
-	text-align: left;
-}
-
-.resultPanel {
-	margin: 0% 3%;
-	display: inline-block;
+.posListTable {
+	border: 1px solid black;
+	margin: 1%;
 }
