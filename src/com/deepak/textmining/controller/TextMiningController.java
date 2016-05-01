@@ -1,6 +1,7 @@
 package com.deepak.textmining.controller;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -43,6 +44,14 @@ public class TextMiningController implements Serializable {
 
     public int getNumberOfSentences() {
         return stringUtils.numberOfSentences(getStringToBeTested());
+    }
+
+    public Map<String, Long> getSimilarWordCount() {
+        return stringUtils.similarWordCount(getStringToBeTested());
+    }
+
+    public Map<String, String[]> getPosDetect() {
+        return posUtil.posDetect(getStringToBeTested());
     }
 
     public StringUtils getStringUtils() {

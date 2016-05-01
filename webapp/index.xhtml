@@ -33,20 +33,46 @@
 
 	<h:panelGroup rendered="#{textMiningController.showResult}"
 		layout="block" styleClass="resultPanel">
-		<table class="numberOfTable">
+		<table class="numberOfTable" id="totalNumberOf">
 			<tr>
 				<th>Total Number of</th>
 				<th></th>
 			</tr>
 			<tr>
 				<td>Words</td>
-				<td>#{textMiningController.totalWordCount}</td>
+				<td title="Total number of words">#{textMiningController.totalWordCount}</td>
 			</tr>
 			<tr>
 				<td>Sentences</td>
-				<td>#{textMiningController.numberOfSentences}</td>
+				<td title="Total number of sentences">#{textMiningController.numberOfSentences}</td>
 			</tr>
 		</table>
+
+		<h:dataTable styleClass="numberOfTable" id="similarWordCount"
+			value="#{textMiningController.similarWordCount.entrySet()}"
+			var="entry">
+			<h:column>
+				<f:facet name="header">Word</f:facet>
+				<h:outputText value="#{entry.key}" title="#{entry.key}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Count</f:facet>
+				<h:outputText value="#{entry.value}" title="#{entry.value}" />
+			</h:column>
+		</h:dataTable>
+
+		<h:dataTable styleClass="numberOfTable" id="posTable"
+			value="#{textMiningController.posDetect.entrySet()}" var="entry">
+			<h:column>
+				<f:facet name="header">Word</f:facet>
+				<h:outputText value="#{entry.key}" title="#{entry.key}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">POS</f:facet>
+				<h:outputText value="#{entry.value[0]}" title="#{entry.value[1]}" />
+			</h:column>
+		</h:dataTable>
+
 	</h:panelGroup>
 </h:body>
 </html>

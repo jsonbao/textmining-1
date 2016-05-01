@@ -52,4 +52,5 @@ table {
 
 .resultPanel {
 	margin: 0% 3%;
+	display: inline-block;
 }
