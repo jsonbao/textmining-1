@@ -5,7 +5,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:rich="http://richfaces.org/rich">
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>Text Mining</title>
@@ -38,20 +39,8 @@
 			headerAlignment="" title="Text Analysis in Detail">
 			<rich:tab name="Number Count" styleClass="nctabC" id="nctab">
 				<div id="numberOfTableDiv">
-					<table class="numberOfTable" id="totalNumberOf">
-						<tr>
-							<th>Total Number of</th>
-							<th></th>
-						</tr>
-						<tr>
-							<td>Words</td>
-							<td title="Total number of words">#{textMiningController.totalWordCount}</td>
-						</tr>
-						<tr>
-							<td>Sentences</td>
-							<td title="Total number of sentences">#{textMiningController.numberOfSentences}</td>
-						</tr>
-					</table>
+					<p:chart type="bar" responsive="true"
+						model="#{textMiningController.barModel}" />
 				</div>
 			</rich:tab>
 
