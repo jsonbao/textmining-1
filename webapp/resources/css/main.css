@@ -14,19 +14,17 @@ body {
 
 .textAnalysisTextArea {
 	resize: none;
-	margin: 3% 23% 2%;
+	margin: 3% 23% 0%;
 }
 
 .submit_button {
 	display: inline-block;
 	margin: 0% 3%;
-	border-radius: 4px;
 }
 
 .reset_button {
 	display: inline-block;
 	margin: 0% 3%;
-	border-radius: 4px;
 }
 
 .oneLineButtons {
@@ -49,7 +47,34 @@ table {
 	
 }
 
+#allWordCountDiv {
+	width: 100%;
+	overflow: hidden;
+}
+
+#wordCountTableDiv, #customWordCountDivOne, #customWordCountDivTwo,
+	#customWordCountDivThree, #customWordCountDivFour {
+	float: left;
+	margin: 1%;
+}
+
 #wordCountTableDiv {
+	display: inline-block;
+}
+
+#customWordCountDivOne {
+	
+}
+
+#customWordCountDivTwo {
+	
+}
+
+#customWordCountDivThree {
+	
+}
+
+#customWordCountDivFour {
 	
 }
 
@@ -63,11 +88,9 @@ table {
 }
 
 .wordCountTable {
-	border: 1px solid black;
 	margin: auto;
 }
 
 .posListTable {
-	border: 1px solid black;
 	margin: auto;
 }

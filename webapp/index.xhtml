@@ -34,9 +34,8 @@
 
 	<h:panelGroup rendered="#{textMiningController.showResult}"
 		layout="block" id="resultPanel">
-		<rich:tabPanel switchType="client"
-			styleClass="textAnalysisC" title="Text Analysis in Detail">
-
+		<rich:tabPanel switchType="client" styleClass="textAnalysisC"
+			headerAlignment="" title="Text Analysis in Detail">
 			<rich:tab name="Number Count" styleClass="nctabC" id="nctab">
 				<div id="numberOfTableDiv">
 					<table class="numberOfTable" id="totalNumberOf">
@@ -59,36 +58,23 @@
 			<rich:tab id="swctab" styleClass="swctabC"
 				title="List of similar words with the number of times repeated"
 				name="Similar Word Count">
-				<div id="wordCountTableDiv">
-					<h:dataTable styleClass="wordCountTable" id="similarWordCount"
-						value="#{textMiningController.similarWordCount.entrySet()}"
-						var="entry">
-						<h:column headerClass="tableHeader">
-							<f:facet name="header">Word</f:facet>
-							<h:outputText value="#{entry.key}" title="#{entry.key}" />
-						</h:column>
-						<h:column headerClass="tableHeader">
-							<f:facet name="header">Count</f:facet>
-							<h:outputText value="#{entry.value}" title="#{entry.value}" />
-						</h:column>
-					</h:dataTable>
-				</div>
+				<ui:include src="wordCount.xhtml" />
 			</rich:tab>
 
 			<rich:tab id="postab" title="Parts of Speech of all the letters"
 				styleClass="postabCls" name="POS">
 				<div id="posListTableDiv">
-					<h:dataTable styleClass="posListTable" id="posTable"
+					<rich:dataTable styleClass="posListTable" id="posTable"
 						value="#{textMiningController.posDetect.entrySet()}" var="entry">
-						<h:column headerClass="tableHeader">
+						<rich:column sortBy="#{entry.key}" headerClass="tableHeader">
 							<f:facet name="header">Word</f:facet>
 							<h:outputText value="#{entry.key}" title="#{entry.key}" />
-						</h:column>
-						<h:column headerClass="tableHeader">
+						</rich:column>
+						<rich:column sortBy="#{entry.value[0]}" headerClass="tableHeader">
 							<f:facet name="header">POS</f:facet>
 							<h:outputText value="#{entry.value[0]}" title="#{entry.value[1]}" />
-						</h:column>
-					</h:dataTable>
+						</rich:column>
+					</rich:dataTable>
 				</div>
 			</rich:tab>
 		</rich:tabPanel>

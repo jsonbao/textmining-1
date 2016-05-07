@@ -54,6 +54,22 @@ public class TextMiningController implements Serializable {
         return posUtil.posDetect(getStringToBeTested());
     }
 
+    public Map<String, Long> getWordsOfSizeOne() {
+        return stringUtils.fetchWordsBasedOnSize(getStringToBeTested(), 1);
+    }
+
+    public Map<String, Long> getWordsOfSizeTwo() {
+        return stringUtils.fetchWordsBasedOnSize(getStringToBeTested(), 2);
+    }
+
+    public Map<String, Long> getWordsOfSizeThree() {
+        return stringUtils.fetchWordsBasedOnSize(getStringToBeTested(), 3);
+    }
+
+    public Map<String, Long> getWordsOfSizeFour() {
+        return stringUtils.fetchWordsBasedOnSize(getStringToBeTested(), 4);
+    }
+
     public StringUtils getStringUtils() {
         return stringUtils;
     }
@@ -93,4 +109,5 @@ public class TextMiningController implements Serializable {
     public void setShowResult(boolean showResult) {
         this.showResult = showResult;
     }
+
 }

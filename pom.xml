@@ -5,8 +5,8 @@
 
 	<groupId>com.deepak</groupId>
 	<artifactId>textmining</artifactId>
-	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 
 	<name>textmining Maven Webapp</name>
 	<url>http://maven.apache.org</url>
@@ -146,4 +146,5 @@
 			<version>19.0</version>
 		</dependency>
 	</dependencies>
+
 </project>
