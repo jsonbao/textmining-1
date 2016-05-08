@@ -2,6 +2,7 @@ package com.deepak.textmining.controller;
 
 import java.io.Serializable;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -34,17 +35,23 @@ public class TextMiningController implements Serializable {
 
     private BarChartModel barModel;
 
+    private Long time;
+
     public void clear() {
         showResult = false;
         stringToBeTested = "";
+        ResourceBundle.clearCache();
     }
 
     public void apply() {
-        //Checks if there are only spaces been given as input
+        ResourceBundle.clearCache();
+        Long start = System.currentTimeMillis();
         if (!getStringToBeTested().trim().isEmpty()) {
             showResult = true;
             initBarModelForNumbeCount();
         }
+        Long end = System.currentTimeMillis();
+        setTime(end - start);
     }
 
     public Long getTotalWordCount() {
@@ -61,6 +68,10 @@ public class TextMiningController implements Serializable {
 
     public Map<String, String[]> getPosDetect() {
         return posUtil.posDetect(getStringToBeTested());
+    }
+
+    public Map<String, Long> getPosCount() {
+        return posUtil.numberOfSimilarPOS(getPosDetect());
     }
 
     public Map<String, Long> getWordsOfSizeOne() {
@@ -104,7 +115,7 @@ public class TextMiningController implements Serializable {
         yAxis.setLabel("Total");
         yAxis.setMin(0);
         if (getTotalWordCount() <= Long.MAX_VALUE) {
-            long y = getTotalWordCount() + (100L - (getTotalWordCount() % 100));
+            long y = getTotalWordCount() + (200L - (getTotalWordCount() % 100));
             yAxis.setMax((getTotalWordCount() % 100 < 100) ? y : getTotalWordCount());
         } else {
             yAxis.setMax(Long.MAX_VALUE);
@@ -132,6 +143,14 @@ public class TextMiningController implements Serializable {
 
     public BarChartModel getBarModel() {
         return barModel;
+    }
+
+    public Long getTime() {
+        return time;
+    }
+
+    public void setTime(Long time) {
+        this.time = time;
     }
 
     public void setBarModel(BarChartModel barModel) {

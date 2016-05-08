@@ -78,8 +78,14 @@ table {
 	
 }
 
-#posListTableDiv {
-	
+#allPosDiv {
+	width: 100%;
+	overflow: hidden;
+}
+
+#posCountTableDiv, #posListTableDiv {
+	float: left;
+	margin: 1%;
 }
 
 .numberOfTable {

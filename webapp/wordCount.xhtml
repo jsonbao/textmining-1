@@ -6,74 +6,79 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:rich="http://richfaces.org/rich">
-<div id="allWordCountDiv">
-	<div id="wordCountTableDiv">
-		<rich:dataTable styleClass="wordCountTable" id="similarWordCount"
-			value="#{textMiningController.similarWordCount.entrySet()}"
-			var="entry">
-			<rich:column sortBy="#{entry.key}" headerClass="tableHeader">
-				<f:facet name="header">Word</f:facet>
-				<h:outputText value="#{entry.key}" title="#{entry.key}" />
-			</rich:column>
-			<rich:column sortBy="#{entry.value}" headerClass="tableHeader">
-				<f:facet name="header">Count</f:facet>
-				<h:outputText value="#{entry.value}" title="#{entry.value}" />
-			</rich:column>
-		</rich:dataTable>
+<head></head>
+<body>
+	<div id="allWordCountDiv">
+		<div id="wordCountTableDiv">
+			<rich:dataTable styleClass="wordCountTable" id="similarWordCount"
+				value="#{textMiningController.similarWordCount.entrySet()}"
+				var="entry">
+				<rich:column sortBy="#{entry.key}" headerClass="tableHeader">
+					<f:facet name="header">Word</f:facet>
+					<h:outputText value="#{entry.key}" title="#{entry.key}" />
+				</rich:column>
+				<rich:column sortBy="#{entry.value}" headerClass="tableHeader">
+					<f:facet name="header">Count</f:facet>
+					<h:outputText value="#{entry.value}" title="#{entry.value}" />
+				</rich:column>
+			</rich:dataTable>
+		</div>
+		<div id="customWordCountDivOne">
+			<rich:dataTable
+				value="#{textMiningController.wordsOfSizeOne.entrySet()}"
+				var="entry">
+				<rich:column sortBy="#{entry.key}" headerClass="tableHeader">
+					<f:facet name="header">Word</f:facet>
+					<h:outputText value="#{entry.key}" title="#{entry.key}" />
+				</rich:column>
+				<rich:column sortBy="#{entry.value}" headerClass="tableHeader">
+					<f:facet name="header">Times Used</f:facet>
+					<h:outputText value="#{entry.value}" title="#{entry.value}" />
+				</rich:column>
+			</rich:dataTable>
+		</div>
+		<div id="customWordCountDivTwo">
+			<rich:dataTable
+				value="#{textMiningController.wordsOfSizeTwo.entrySet()}"
+				var="entry">
+				<rich:column sortBy="#{entry.key}" headerClass="tableHeader">
+					<f:facet name="header">Word</f:facet>
+					<h:outputText value="#{entry.key}" title="#{entry.key}" />
+				</rich:column>
+				<rich:column sortBy="#{entry.value}" headerClass="tableHeader">
+					<f:facet name="header">Times Used</f:facet>
+					<h:outputText value="#{entry.value}" title="#{entry.value}" />
+				</rich:column>
+			</rich:dataTable>
+		</div>
+		<div id="customWordCountDivThree">
+			<rich:dataTable
+				value="#{textMiningController.wordsOfSizeThree.entrySet()}"
+				var="entry">
+				<rich:column sortBy="#{entry.key}" headerClass="tableHeader">
+					<f:facet name="header">Word</f:facet>
+					<h:outputText value="#{entry.key}" title="#{entry.key}" />
+				</rich:column>
+				<rich:column sortBy="#{entry.value}" headerClass="tableHeader">
+					<f:facet name="header">Times Used</f:facet>
+					<h:outputText value="#{entry.value}" title="#{entry.value}" />
+				</rich:column>
+			</rich:dataTable>
+		</div>
+		<div id="customWordCountDivFour">
+			<rich:dataTable
+				value="#{textMiningController.wordsOfSizeFour.entrySet()}"
+				var="entry">
+				<rich:column sortBy="#{entry.key}" headerClass="tableHeader">
+					<f:facet name="header">Word</f:facet>
+					<h:outputText value="#{entry.key}" title="#{entry.key}" />
+				</rich:column>
+				<rich:column sortBy="#{entry.value}" headerClass="tableHeader">
+					<f:facet name="header">Times Used</f:facet>
+					<h:outputText value="#{entry.value}" title="#{entry.value}" />
+				</rich:column>
+			</rich:dataTable>
+		</div>
 	</div>
-	<div id="customWordCountDivOne">
-		<rich:dataTable
-			value="#{textMiningController.wordsOfSizeOne.entrySet()}" var="entry">
-			<rich:column sortBy="#{entry.key}" headerClass="tableHeader">
-				<f:facet name="header">Word</f:facet>
-				<h:outputText value="#{entry.key}" title="#{entry.key}" />
-			</rich:column>
-			<rich:column sortBy="#{entry.value}" headerClass="tableHeader">
-				<f:facet name="header">Times Used</f:facet>
-				<h:outputText value="#{entry.value}" title="#{entry.value}" />
-			</rich:column>
-		</rich:dataTable>
-	</div>
-	<div id="customWordCountDivTwo">
-		<rich:dataTable
-			value="#{textMiningController.wordsOfSizeTwo.entrySet()}" var="entry">
-			<rich:column sortBy="#{entry.key}" headerClass="tableHeader">
-				<f:facet name="header">Word</f:facet>
-				<h:outputText value="#{entry.key}" title="#{entry.key}" />
-			</rich:column>
-			<rich:column sortBy="#{entry.value}" headerClass="tableHeader">
-				<f:facet name="header">Times Used</f:facet>
-				<h:outputText value="#{entry.value}" title="#{entry.value}" />
-			</rich:column>
-		</rich:dataTable>
-	</div>
-	<div id="customWordCountDivThree">
-		<rich:dataTable
-			value="#{textMiningController.wordsOfSizeThree.entrySet()}"
-			var="entry">
-			<rich:column sortBy="#{entry.key}" headerClass="tableHeader">
-				<f:facet name="header">Word</f:facet>
-				<h:outputText value="#{entry.key}" title="#{entry.key}" />
-			</rich:column>
-			<rich:column sortBy="#{entry.value}" headerClass="tableHeader">
-				<f:facet name="header">Times Used</f:facet>
-				<h:outputText value="#{entry.value}" title="#{entry.value}" />
-			</rich:column>
-		</rich:dataTable>
-	</div>
-	<div id="customWordCountDivFour">
-		<rich:dataTable
-			value="#{textMiningController.wordsOfSizeFour.entrySet()}"
-			var="entry">
-			<rich:column sortBy="#{entry.key}" headerClass="tableHeader">
-				<f:facet name="header">Word</f:facet>
-				<h:outputText value="#{entry.key}" title="#{entry.key}" />
-			</rich:column>
-			<rich:column sortBy="#{entry.value}" headerClass="tableHeader">
-				<f:facet name="header">Times Used</f:facet>
-				<h:outputText value="#{entry.value}" title="#{entry.value}" />
-			</rich:column>
-		</rich:dataTable>
-	</div>
-</div>
+</body>
 </html>

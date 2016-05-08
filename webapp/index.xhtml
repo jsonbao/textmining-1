@@ -52,19 +52,7 @@
 
 			<rich:tab id="postab" title="Parts of Speech of all the letters"
 				styleClass="postabCls" name="POS">
-				<div id="posListTableDiv">
-					<rich:dataTable styleClass="posListTable" id="posTable"
-						value="#{textMiningController.posDetect.entrySet()}" var="entry">
-						<rich:column sortBy="#{entry.key}" headerClass="tableHeader">
-							<f:facet name="header">Word</f:facet>
-							<h:outputText value="#{entry.key}" title="#{entry.key}" />
-						</rich:column>
-						<rich:column sortBy="#{entry.value[0]}" headerClass="tableHeader">
-							<f:facet name="header">POS</f:facet>
-							<h:outputText value="#{entry.value[0]}" title="#{entry.value[1]}" />
-						</rich:column>
-					</rich:dataTable>
-				</div>
+				<ui:include src="posTables.xhtml" />
 			</rich:tab>
 		</rich:tabPanel>
 	</h:panelGroup>

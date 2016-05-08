@@ -9,11 +9,19 @@ import java.util.StringTokenizer;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentMap;
 
+import com.deepak.textmining.converters.NumberToEnglishWordsConverter;
+
 /**
  * @author Deepak
  *
  */
 public class StringUtils {
+
+    private NumberToEnglishWordsConverter ntewc;
+
+    public void setNtewc(NumberToEnglishWordsConverter ntewc) {
+        this.ntewc = ntewc;
+    }
 
     /**
      * Get number of words present in a string. Counts the number of words by excluding the
@@ -157,6 +165,45 @@ public class StringUtils {
      */
     public Map<String, Long> fetchWordsBasedOnSize(String[] string, int size) {
         return fetchWordsBasedOnSize(Arrays.toString(string), size);
+    }
+
+    /**
+     * Fetch count of words of all Sizes
+     * 
+     * @param string
+     *            {@link String} from which words are extracted
+     * @return {@link Map} which has key as size of words and value as number of words of that size
+     */
+    public Map<String, Long> fetchCountOfWordsBySize(String string) {
+        Map<String, Long> countOfWordsBySize = new HashMap<>();
+        String currentString = null;
+        StringTokenizer strToken = new StringTokenizer(string.replaceAll("[^a-zA-Z0-9 ]", ""));
+        while (strToken.hasMoreTokens()) {
+            currentString = strToken.nextToken();
+            if (currentString != null) {
+                currentString.length();
+                if (!countOfWordsBySize.containsKey(ntewc.convert(currentString.length()))) {
+                    countOfWordsBySize.put(ntewc.convert(currentString.length()), 1L);
+                } else {
+                    countOfWordsBySize.put(ntewc.convert(currentString.length()),
+                            countOfWordsBySize.get(ntewc.convert(currentString.length())) + 1);
+                }
+            }
+        }
+        currentString = null;
+        strToken = null;
+        return countOfWordsBySize;
+    }
+
+    /**
+     * Fetch count of words of all Sizes
+     * 
+     * @param string
+     *            Array of {@link String} from which words are to be extracted
+     * @return {@link Map} which has key as size of words and value as number of words of that size
+     */
+    public Map<String, Long> fetchCountOfWordsBySize(String[] string) {
+        return fetchCountOfWordsBySize(Arrays.toString(string));
     }
 
 }
