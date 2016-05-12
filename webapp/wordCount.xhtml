@@ -5,8 +5,9 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:rich="http://richfaces.org/rich">
-<head></head>
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:p="http://primefaces.org/ui">
+
 <body>
 	<div id="allWordCountDiv">
 		<div id="wordCountTableDiv">
@@ -75,6 +76,20 @@
 				</rich:column>
 				<rich:column sortBy="#{entry.value}" headerClass="tableHeader">
 					<f:facet name="header">Times Used</f:facet>
+					<h:outputText value="#{entry.value}" title="#{entry.value}" />
+				</rich:column>
+			</rich:dataTable>
+		</div>
+		<div id="customWordCountDivFive">
+			<rich:dataTable
+				value="#{textMiningController.countOfWordsBySize.entrySet()}"
+				var="entry">
+				<rich:column headerClass="tableHeader">
+					<f:facet name="header">Word Size</f:facet>
+					<h:outputText value="#{entry.key}" title="#{entry.key}" />
+				</rich:column>
+				<rich:column sortBy="#{entry.value}" headerClass="tableHeader">
+					<f:facet name="header">No. of occurences</f:facet>
 					<h:outputText value="#{entry.value}" title="#{entry.value}" />
 				</rich:column>
 			</rich:dataTable>

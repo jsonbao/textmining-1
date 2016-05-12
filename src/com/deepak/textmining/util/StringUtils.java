@@ -3,6 +3,7 @@ package com.deepak.textmining.util;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -175,7 +176,7 @@ public class StringUtils {
      * @return {@link Map} which has key as size of words and value as number of words of that size
      */
     public Map<String, Long> fetchCountOfWordsBySize(String string) {
-        Map<String, Long> countOfWordsBySize = new HashMap<>();
+        Map<String, Long> countOfWordsBySize = new LinkedHashMap<>();
         String currentString = null;
         StringTokenizer strToken = new StringTokenizer(string.replaceAll("[^a-zA-Z0-9 ]", ""));
         while (strToken.hasMoreTokens()) {

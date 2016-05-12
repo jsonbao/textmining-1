@@ -12,6 +12,7 @@ import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.LegendPlacement;
+import org.primefaces.model.chart.PieChartModel;
 
 import com.deepak.textmining.util.MapUtils;
 import com.deepak.textmining.util.POSUtil;
@@ -36,6 +37,8 @@ public class TextMiningController implements Serializable {
     private BarChartModel barModel;
 
     private Long time;
+
+    private PieChartModel pieChartModel;
 
     public void clear() {
         showResult = false;
@@ -90,21 +93,25 @@ public class TextMiningController implements Serializable {
         return stringUtils.fetchWordsBasedOnSize(getStringToBeTested(), 4);
     }
 
+    public Map<String, Long> getCountOfWordsBySize() {
+        return stringUtils.fetchCountOfWordsBySize(getStringToBeTested());
+    }
+
     public void initBarModelForNumbeCount() {
         barModel = new BarChartModel();
         barModel.setAnimate(true);
         barModel.setBarWidth(350);
         barModel.setTitle("Total Number of Sentences and Words");
         barModel.setLegendPlacement(LegendPlacement.INSIDE);
-        barModel.setLegendPosition("ne");
+        barModel.setLegendPosition("nw");
 
         ChartSeries sentences = new ChartSeries();
         sentences.setLabel("Sentences");
-        sentences.set(barModel.getTitle(), getNumberOfSentences());
+        sentences.set(" ", getNumberOfSentences());
 
         ChartSeries words = new ChartSeries();
         words.setLabel("Words");
-        words.set(barModel.getTitle(), getTotalWordCount());
+        words.set(" ", getTotalWordCount());
 
         barModel.addSeries(sentences);
         barModel.addSeries(words);
@@ -147,6 +154,14 @@ public class TextMiningController implements Serializable {
 
     public Long getTime() {
         return time;
+    }
+
+    public PieChartModel getPieChartModel() {
+        return pieChartModel;
+    }
+
+    public void setPieChartModel(PieChartModel pieChartModel) {
+        this.pieChartModel = pieChartModel;
     }
 
     public void setTime(Long time) {

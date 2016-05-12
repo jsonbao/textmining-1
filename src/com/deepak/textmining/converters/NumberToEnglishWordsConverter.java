@@ -4,29 +4,28 @@ import java.text.DecimalFormat;
 
 public class NumberToEnglishWordsConverter {
 
-    private final String[] tensNames = { "", " ten", " twenty", " thirty", " forty", " fifty", " sixty", " seventy",
+    private final String[] tensInWords = { "", " ten", " twenty", " thirty", " forty", " fifty", " sixty", " seventy",
             " eighty", " ninety" };
 
-    private final String[] numNames = { "", " one", " two", " three", " four", " five", " six", " seven", " eight",
-            " nine", " ten", " eleven", " twelve", " thirteen", " fourteen", " fifteen", " sixteen", " seventeen",
-            " eighteen", " nineteen" };
+    private final String[] numbersInWords = { "", " one", " two", " three", " four", " five", " six", " seven",
+            " eight", " nine", " ten", " eleven", " twelve", " thirteen", " fourteen", " fifteen", " sixteen",
+            " seventeen", " eighteen", " nineteen" };
 
     private String convertLessThanOneThousand(int number) {
-        String soFar;
-
+        String numberInWords;
         if (number % 100 < 20) {
-            soFar = numNames[number % 100];
+            numberInWords = numbersInWords[number % 100];
             number /= 100;
         } else {
-            soFar = numNames[number % 10];
+            numberInWords = numbersInWords[number % 10];
             number /= 10;
 
-            soFar = tensNames[number % 10] + soFar;
+            numberInWords = tensInWords[number % 10] + numberInWords;
             number /= 10;
         }
         if (number == 0)
-            return soFar;
-        return numNames[number] + " hundred" + soFar;
+            return numberInWords;
+        return numbersInWords[number] + " hundred" + numberInWords;
     }
 
     public String convert(long number) {
@@ -34,22 +33,21 @@ public class NumberToEnglishWordsConverter {
         if (number == 0) {
             return "zero";
         }
-
-        String snumber = Long.toString(number);
+        String stringNumber = Long.toString(number);
 
         // pad with "0"
         String mask = "000000000000";
-        DecimalFormat df = new DecimalFormat(mask);
-        snumber = df.format(number);
+        DecimalFormat decimalFormat = new DecimalFormat(mask);
+        stringNumber = decimalFormat.format(number);
 
         // XXXnnnnnnnnn
-        int billions = Integer.parseInt(snumber.substring(0, 3));
+        int billions = Integer.parseInt(stringNumber.substring(0, 3));
         // nnnXXXnnnnnn
-        int millions = Integer.parseInt(snumber.substring(3, 6));
+        int millions = Integer.parseInt(stringNumber.substring(3, 6));
         // nnnnnnXXXnnn
-        int hundredThousands = Integer.parseInt(snumber.substring(6, 9));
+        int hundredThousands = Integer.parseInt(stringNumber.substring(6, 9));
         // nnnnnnnnnXXX
-        int thousands = Integer.parseInt(snumber.substring(9, 12));
+        int thousands = Integer.parseInt(stringNumber.substring(9, 12));
 
         String tradBillions;
         switch (billions) {
@@ -93,7 +91,6 @@ public class NumberToEnglishWordsConverter {
         String tradThousand;
         tradThousand = convertLessThanOneThousand(thousands);
         result = result + tradThousand;
-
         // remove extra spaces!
         return result.replaceAll("^\\s+", "").replaceAll("\\b\\s{2,}\\b", " ");
     }

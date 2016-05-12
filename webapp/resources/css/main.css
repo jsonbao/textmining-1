@@ -53,7 +53,8 @@ table {
 }
 
 #wordCountTableDiv, #customWordCountDivOne, #customWordCountDivTwo,
-	#customWordCountDivThree, #customWordCountDivFour {
+	#customWordCountDivThree, #customWordCountDivFour,
+	#customWordCountDivFive {
 	float: left;
 	margin: 1%;
 }
@@ -75,6 +76,10 @@ table {
 }
 
 #customWordCountDivFour {
+	
+}
+
+#customWordCountDivFive {
 	
 }
 
