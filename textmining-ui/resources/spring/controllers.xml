@@ -15,4 +15,9 @@
 		<property name="stringUtils" ref="stringUtils" />
 	</bean>
 
+	<bean id="compareAnalysisController" class="com.textmining.ui.controller.CompareAnalysisController"
+		scope="session">
+
+	</bean>
+
 </beans>

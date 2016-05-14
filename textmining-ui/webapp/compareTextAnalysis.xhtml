@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Compare Text</title>
+</h:head>
+
+<h:body styleClass="body">
+	<ui:include src="/resources/templates/header.xhtml" />
+
+	<h:form styleClass="compareform">
+		<div id="twoTextArea">
+			<h:inputTextarea id="stringOne"
+				requiredMessage="Text required in the box"
+				value="#{compareAnalysisController.stringOne}" cols="100" rows="10"
+				styleClass="compareformTextArea1">
+				<f:ajax event="keyup" render="stringTwo" />
+			</h:inputTextarea>
+			<h:inputTextarea id="stringTwo"
+				requiredMessage="Text required in the box"
+				value="#{compareAnalysisController.stringTwo}" cols="100" rows="10"
+				styleClass="compareformTextArea2">
+				<f:ajax event="keyup" render="submitButton resetButton" />
+			</h:inputTextarea>
+		</div>
+		<div class="oneLineButtons">
+			<h:commandButton value="Submit" id="submitButton"
+				disabled="#{empty compareAnalysisController.stringTwo}"
+				action="#{compareAnalysisController.apply}"
+				styleClass="submit_button" />
+			<h:commandButton value="Reset" id="resetButton"
+				disabled="#{empty compareAnalysisController.stringTwo}"
+				action="#{compareAnalysisController.clear}"
+				styleClass="reset_button" />
+		</div>
+	</h:form>
+
+</h:body>
+</html>

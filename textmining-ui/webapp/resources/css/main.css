@@ -105,3 +105,25 @@ table {
 .posListTable {
 	margin: auto;
 }
+
+#twoTextArea {
+	width: 100%;
+	overflow: hidden;
+	display: flex;
+}
+
+.compareformTextArea1, .compareformTextArea2 {
+	float: left;
+	margin: 1%;
+	width: 40%;
+}
+
+.compareformTextArea1 {
+	resize: none;
+	margin: auto;
+}
+
+.compareformTextArea2 {
+	resize: none;
+	margin: auto;
+}
