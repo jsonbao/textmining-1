@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich">
+
+<body>
+	<div id="allPosDiv">
+		<div id="posListTableDiv">
+			<rich:dataTable styleClass="posListTable" id="posTable"
+				value="#{textMiningController.posDetect.entrySet()}" var="entry">
+				<rich:column sortBy="#{entry.key}" headerClass="tableHeader">
+					<f:facet name="header">Word</f:facet>
+					<h:outputText value="#{entry.key}" title="#{entry.key}" />
+				</rich:column>
+				<rich:column sortBy="#{entry.value[0]}" headerClass="tableHeader">
+					<f:facet name="header">POS</f:facet>
+					<h:outputText value="#{entry.value[0]}" title="#{entry.value[1]}" />
+				</rich:column>
+			</rich:dataTable>
+		</div>
+		<div id="posCountTableDiv">
+			<rich:dataTable styleClass="posListTable" id="posCountTable"
+				value="#{textMiningController.posCount.entrySet()}" var="entry">
+				<rich:column sortBy="#{entry.key}" headerClass="tableHeader">
+					<f:facet name="header">POS</f:facet>
+					<h:outputText value="#{entry.key}" />
+				</rich:column>
+				<rich:column sortBy="#{entry.value}" headerClass="tableHeader">
+					<f:facet name="header">Occurences</f:facet>
+					<h:outputText value="#{entry.value}" title="#{entry.value}" />
+				</rich:column>
+			</rich:dataTable>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/web-services
+      					http://www.springframework.org/schema/web-services/web-services.xsd">
+
+	<import resource="textmining-core.xml" />
+
+	<context:component-scan base-package="com.textmining.core" />
+
+	<bean id="stringUtils" class="com.textmining.core.util.StringUtils">
+		<property name="ntewc" ref="ntewc" />
+	</bean>
+
+	<bean id="posUtil" class="com.textmining.core.util.POSUtil">
+		<property name="tokenizerME" ref="tokenizerME" />
+		<property name="posTaggerME" ref="posTaggerME" />
+		<property name="posMap" ref="posMap" />
+	</bean>
+
+	<bean id="mapUtils" class="com.textmining.core.util.MapUtils" />
+
+	<bean id="ntewc"
+		class="com.textmining.core.converters.NumberToEnglishWordsConverter" />
+
+</beans>

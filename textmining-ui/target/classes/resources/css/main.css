@@ -1,0 +1,107 @@
+body {
+	margin: 0%;
+	background-color: #F6F6F6;
+	width: 100%;
+}
+
+.textminingform {
+	width: 100%;
+}
+
+#textAnalysisTab {
+	
+}
+
+.textAnalysisTextArea {
+	resize: none;
+	margin: 3% 23% 0%;
+}
+
+.submit_button {
+	display: inline-block;
+	margin: 0% 3%;
+}
+
+.reset_button {
+	display: inline-block;
+	margin: 0% 3%;
+}
+
+.oneLineButtons {
+	padding: 1% 44%;
+}
+
+table {
+	
+}
+
+#resultPanel {
+	padding: 0% 2%;
+}
+
+#resultPanelRowOne div {
+	float: left;
+}
+
+#numberOfTableDiv {
+	
+}
+
+#allWordCountDiv {
+	width: 100%;
+	overflow: hidden;
+}
+
+#wordCountTableDiv, #customWordCountDivOne, #customWordCountDivTwo,
+	#customWordCountDivThree, #customWordCountDivFour,
+	#customWordCountDivFive {
+	float: left;
+	margin: 1%;
+}
+
+#wordCountTableDiv {
+	display: inline-block;
+}
+
+#customWordCountDivOne {
+	
+}
+
+#customWordCountDivTwo {
+	
+}
+
+#customWordCountDivThree {
+	
+}
+
+#customWordCountDivFour {
+	
+}
+
+#customWordCountDivFive {
+	
+}
+
+#allPosDiv {
+	width: 100%;
+	overflow: hidden;
+}
+
+#posCountTableDiv, #posListTableDiv {
+	float: left;
+	margin: 1%;
+}
+
+.numberOfTable {
+	border: 1px solid black;
+	margin: auto;
+}
+
+.wordCountTable {
+	margin: auto;
+}
+
+.posListTable {
+	margin: auto;
+}

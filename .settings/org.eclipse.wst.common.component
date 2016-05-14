@@ -1,14 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="textmining">
-        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
-        <wb-resource deploy-path="/" source-path="/webapp"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/resources"/>
-        <wb-resource deploy-path="/" source-path="/test"/>
-        <wb-resource deploy-path="/" source-path="/test-resources"/>
-        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/webapp"/>
-        <property name="context-root" value="textmining"/>
-        <property name="java-output-path" value="/textmining/target/classes"/>
-    </wb-module>
+    <wb-module deploy-name="textmining-parent"/>
 </project-modules>
