@@ -13,14 +13,29 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.textmining.core.util.POSUtil;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:/spring/applicationContext.xml" })
 public class POSUtilTest {
 
     @Resource
     private POSUtil posUtil;
+
+    @Test
+    public void numberOfSimilarPOSTest() {
+        String[] string = { "Hello How are you Mike?", "I am Fine Hello." };
+        Map<String, Long> posMap = posUtil.numberOfSimilarPOS(string);
+
+        assertThat(posMap.size(), is(6));
+
+        assertThat(posMap.get("UH"), is(1L));
+        assertThat(posMap.get("WRB"), is(1L));
+        assertThat(posMap.get("VBP"), is(2L));
+        assertThat(posMap.get("JJ"), is(1L));
+        assertThat(posMap.get("NNP"), is(1L));
+        assertThat(posMap.get("PRP"), is(2L));
+        posMap.clear();
+
+    }
 
     @Test
     public void posDetectTest() {
@@ -44,21 +59,6 @@ public class POSUtilTest {
         assertThat(posMap.get("I")[2], is(equalTo("1")));
         assertThat(posMap.get("am")[2], is(equalTo("1")));
         assertThat(posMap.get("Fine")[2], is(equalTo("1")));
-    }
-
-    @Test
-    public void numberOfSimilarPOSTest() {
-        String[] string = { "Hello How are you Mike?", "I am Fine Hello." };
-        Map<String, Long> posMap = posUtil.numberOfSimilarPOS(string);
-
-        assertThat(posMap.size(), is(6));
-
-        assertThat(posMap.get("UH"), is(1L));
-        assertThat(posMap.get("WRB"), is(1L));
-        assertThat(posMap.get("VBP"), is(2L));
-        assertThat(posMap.get("JJ"), is(1L));
-        assertThat(posMap.get("NNP"), is(1L));
-        assertThat(posMap.get("PRP"), is(2L));
-
+        posMap.clear();
     }
 }

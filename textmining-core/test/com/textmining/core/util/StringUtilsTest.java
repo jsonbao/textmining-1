@@ -37,7 +37,7 @@ public class StringUtilsTest {
         String[] string = { "Hello how are you?", "I am fine. How about you?", "Me too." };
         assertEquals(2, stringUtils.fetchWordsBasedOnSize(string, 2).size());
         assertThat(1L, is(equalTo(stringUtils.fetchWordsBasedOnSize(string, 2).get("am"))));
-        assertThat(1L, is(equalTo(stringUtils.fetchWordsBasedOnSize(string, 2).get("Me"))));
+        assertThat(1L, is(equalTo(stringUtils.fetchWordsBasedOnSize(string, 2).get("me"))));
     }
 
     @Test
@@ -50,11 +50,11 @@ public class StringUtilsTest {
     public void testSimilarWordCountArray() {
         String[] str = { "Hello how do you do! ' ' ", "I am fine how are you " };
         assertEquals(8, stringUtils.similarWordCount(str).size());
-        assertEquals(1, stringUtils.similarWordCount(str).get("Hello").intValue());
+        assertEquals(1, stringUtils.similarWordCount(str).get("hello").intValue());
         assertEquals(2, stringUtils.similarWordCount(str).get("how").intValue());
         assertEquals(2, stringUtils.similarWordCount(str).get("do").intValue());
         assertEquals(2, stringUtils.similarWordCount(str).get("you").intValue());
-        assertEquals(1, stringUtils.similarWordCount(str).get("I").intValue());
+        assertEquals(1, stringUtils.similarWordCount(str).get("i").intValue());
         assertEquals(1, stringUtils.similarWordCount(str).get("am").intValue());
         assertEquals(1, stringUtils.similarWordCount(str).get("fine").intValue());
         assertEquals(1, stringUtils.similarWordCount(str).get("are").intValue());

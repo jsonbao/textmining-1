@@ -9,24 +9,43 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.textmining.core.util.MapUtils;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:/spring/applicationContext.xml" })
 public class MapUtilsTest {
 
+    static Map<String, String> map1 = new HashMap<>();
+
+    static Map<String, String> map2 = new HashMap<>();
+
+    @AfterClass
+    public static void terminate() {
+        map1.clear();
+        map2.clear();
+    }
+
     @Resource
     private MapUtils mapUtils;
 
-    Map<String, String> map1 = new HashMap<>();
-
-    Map<String, String> map2 = new HashMap<>();
+    @Test
+    public void commonKeysTest() {
+        Set<String> commonKeys = mapUtils.commonKeys(map1, map2);
+        assertThat(commonKeys.size(), is(3));
+        assertThat(commonKeys.contains("are"), is(true));
+        assertThat(commonKeys.contains("how"), is(true));
+        assertThat(commonKeys.contains("you"), is(true));
+        assertThat(commonKeys.contains("Hello"), is(false));
+        assertThat(commonKeys.contains("I"), is(false));
+        assertThat(commonKeys.contains("am"), is(false));
+        assertThat(commonKeys.contains("fine"), is(false));
+        commonKeys.clear();
+    }
 
     @Before
     public void setUp() {
@@ -44,19 +63,6 @@ public class MapUtilsTest {
     }
 
     @Test
-    public void commonKeysTest() {
-        Set<String> commonKeys = mapUtils.commonKeys(map1, map2);
-        assertThat(commonKeys.size(), is(3));
-        assertThat(commonKeys.contains("are"), is(true));
-        assertThat(commonKeys.contains("how"), is(true));
-        assertThat(commonKeys.contains("you"), is(true));
-        assertThat(commonKeys.contains("Hello"), is(false));
-        assertThat(commonKeys.contains("I"), is(false));
-        assertThat(commonKeys.contains("am"), is(false));
-        assertThat(commonKeys.contains("fine"), is(false));
-    }
-
-    @Test
     public void uncommonKeysTest() {
         Set<String> uncommonKeys = mapUtils.uncommonKeys(map1, map2);
         assertThat(uncommonKeys.size(), is(4));
@@ -67,5 +73,6 @@ public class MapUtilsTest {
         assertThat(uncommonKeys.contains("I"), is(true));
         assertThat(uncommonKeys.contains("am"), is(true));
         assertThat(uncommonKeys.contains("fine"), is(true));
+        uncommonKeys.clear();
     }
 }

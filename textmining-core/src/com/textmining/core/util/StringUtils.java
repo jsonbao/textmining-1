@@ -20,8 +20,149 @@ public class StringUtils {
 
     private NumberToEnglishWordsConverter ntewc;
 
+    /**
+     * Fetch count of words of all Sizes
+     * 
+     * @param string
+     *            {@link String} from which words are extracted
+     * @return {@link Map} which has key as size of words and value as number of words of that size
+     */
+    public Map<String, Long> fetchCountOfWordsBySize(String string) {
+        Map<String, Long> countOfWordsBySize = new LinkedHashMap<>();
+        String currentString = null;
+        StringTokenizer strToken = new StringTokenizer(string.replaceAll("[^a-zA-Z0-9 ]", ""));
+        while (strToken.hasMoreTokens()) {
+            currentString = strToken.nextToken().toLowerCase();
+            if (currentString != null) {
+                currentString.length();
+                if (!countOfWordsBySize.containsKey(ntewc.convert(currentString.length()))) {
+                    countOfWordsBySize.put(ntewc.convert(currentString.length()), 1L);
+                } else {
+                    countOfWordsBySize.put(ntewc.convert(currentString.length()),
+                            countOfWordsBySize.get(ntewc.convert(currentString.length())) + 1);
+                }
+            }
+        }
+        currentString = null;
+        strToken = null;
+        return countOfWordsBySize;
+    }
+
+    /**
+     * Fetch count of words of all Sizes
+     * 
+     * @param string
+     *            Array of {@link String} from which words are to be extracted
+     * @return {@link Map} which has key as size of words and value as number of words of that size
+     */
+    public Map<String, Long> fetchCountOfWordsBySize(String[] string) {
+        return fetchCountOfWordsBySize(Arrays.toString(string));
+    }
+
+    /**
+     * Fetch words based on required size
+     * 
+     * @param string
+     *            String from which words are to be extracted
+     * @param size
+     *            size of words requried
+     * @return {@link Map} of words with required and the number of times repeated
+     */
+    public Map<String, Long> fetchWordsBasedOnSize(String string, int size) {
+        Map<String, Long> map = similarWordCount(string);
+        List<String> str = new ArrayList<>();
+        for (Map.Entry<String, Long> mapEntry : map.entrySet()) {
+            if (mapEntry.getKey().length() != size) {
+                str.add(mapEntry.getKey());
+            }
+        }
+        for (String st : str) {
+            map.remove(st);
+        }
+        TreeMap<String, Long> newMap = new TreeMap<>();
+        newMap.putAll(map);
+        map = null;
+        str = null;
+        return newMap;
+    }
+
+    /**
+     * Fetch words based on required size
+     * 
+     * @param string
+     *            Array of {@link String} from which words are to be extracted
+     * @param size
+     *            size of words required
+     * @return {@link Map} of words with required and the number of times repeated
+     */
+    public Map<String, Long> fetchWordsBasedOnSize(String[] string, int size) {
+        return fetchWordsBasedOnSize(Arrays.toString(string), size);
+    }
+
+    /**
+     * Find the number of sentences in the given {@link String}
+     * 
+     * @param string
+     *            {@link String}
+     * @return Number of sentences in the given {@link String}
+     */
+    public int numberOfSentences(String string) {
+        return new StringTokenizer(string, "[?.]+").countTokens();
+    }
+
+    /**
+     * Find the number of sentences in the given Array of {@link String}
+     * 
+     * @param string
+     *            Array of {@link String}
+     * @return Number of sentences in the given Array of {@link String}
+     */
+    public int numberOfSentences(String[] string) {
+        return numberOfSentences(Arrays.toString(string));
+    }
+
     public void setNtewc(NumberToEnglishWordsConverter ntewc) {
         this.ntewc = ntewc;
+    }
+
+    /**
+     * Gives a Map with String as Key and the number of occurrences of the string as value
+     * 
+     * @param string
+     *            {@link String} whose similar word count is required
+     * @return {@link ConcurrentMap} which has String as key and the number of occurrences of the
+     *         string as value
+     */
+    public Map<String, Long> similarWordCount(String string) {
+        Map<String, Long> wordCount = new HashMap<>();
+        StringTokenizer strToken = new StringTokenizer(string.replaceAll("[^a-zA-Z0-9 ]", ""));
+        String currentString = null;
+        while (strToken.hasMoreTokens()) {
+            currentString = strToken.nextToken().toLowerCase();
+            if (currentString != null) {
+                if (wordCount.containsKey(currentString)) {
+                    wordCount.put(currentString, wordCount.get(currentString) + 1);
+                } else {
+                    wordCount.put(currentString, 1L);
+                }
+            }
+            currentString = null;
+        }
+        currentString = null;
+        strToken = null;
+        return wordCount;
+    }
+
+    /**
+     * Gives a Map with String as Key and the number of occurrences of the string array as value
+     * 
+     * @param string
+     *            Array of {@link String} whose similar word count is required
+     * @return {@link ConcurrentMap} which has String as key and the number of occurrences of the
+     *         string as value
+     */
+    public Map<String, Long> similarWordCount(String[] string) {
+        return similarWordCount(Arrays.toString(string));
     }
 
     /**
@@ -64,147 +205,6 @@ public class StringUtils {
      */
     public Long totalWordCount(String[] string) {
         return totalWordCount(Arrays.toString(string));
-    }
-
-    /**
-     * Gives a Map with String as Key and the number of occurrences of the string as value
-     * 
-     * @param string
-     *            {@link String} whose similar word count is required
-     * @return {@link ConcurrentMap} which has String as key and the number of occurrences of the
-     *         string as value
-     */
-    public Map<String, Long> similarWordCount(String string) {
-        Map<String, Long> wordCount = new HashMap<String, Long>();
-        StringTokenizer strToken = new StringTokenizer(string.replaceAll("[^a-zA-Z0-9 ]", ""));
-        String currentString = null;
-        while (strToken.hasMoreTokens()) {
-            currentString = strToken.nextToken();
-            if (currentString != null) {
-                if (wordCount.containsKey(currentString)) {
-                    wordCount.put(currentString, wordCount.get(currentString) + 1);
-                } else {
-                    wordCount.put(currentString, 1L);
-                }
-            }
-            currentString = null;
-        }
-        currentString = null;
-        strToken = null;
-        return wordCount;
-    }
-
-    /**
-     * Gives a Map with String as Key and the number of occurrences of the string array as value
-     * 
-     * @param string
-     *            Array of {@link String} whose similar word count is required
-     * @return {@link ConcurrentMap} which has String as key and the number of occurrences of the
-     *         string as value
-     */
-    public Map<String, Long> similarWordCount(String[] string) {
-        return similarWordCount(Arrays.toString(string));
-    }
-
-    /**
-     * Find the number of sentences in the given {@link String}
-     * 
-     * @param string
-     *            {@link String}
-     * @return Number of sentences in the given {@link String}
-     */
-    public int numberOfSentences(String string) {
-        return new StringTokenizer(string, "[?.]+").countTokens();
-    }
-
-    /**
-     * Find the number of sentences in the given Array of {@link String}
-     * 
-     * @param string
-     *            Array of {@link String}
-     * @return Number of sentences in the given Array of {@link String}
-     */
-    public int numberOfSentences(String[] string) {
-        return numberOfSentences(Arrays.toString(string));
-    }
-
-    /**
-     * Fetch words based on required size
-     * 
-     * @param string
-     *            String from which words are to be extracted
-     * @param size
-     *            size of words requried
-     * @return {@link Map} of words with required and the number of times repeated
-     */
-    public Map<String, Long> fetchWordsBasedOnSize(String string, int size) {
-        Map<String, Long> map = similarWordCount(string);
-        List<String> str = new ArrayList<>();
-        for (Map.Entry<String, Long> mapEntry : map.entrySet()) {
-            if (mapEntry.getKey().length() != size) {
-                str.add(mapEntry.getKey());
-            }
-        }
-        for (String st : str) {
-            map.remove(st);
-        }
-        TreeMap<String, Long> newMap = new TreeMap<String, Long>();
-        newMap.putAll(map);
-        map = null;
-        str = null;
-        return newMap;
-    }
-
-    /**
-     * Fetch words based on required size
-     * 
-     * @param string
-     *            Array of {@link String} from which words are to be extracted
-     * @param size
-     *            size of words required
-     * @return {@link Map} of words with required and the number of times repeated
-     */
-    public Map<String, Long> fetchWordsBasedOnSize(String[] string, int size) {
-        return fetchWordsBasedOnSize(Arrays.toString(string), size);
-    }
-
-    /**
-     * Fetch count of words of all Sizes
-     * 
-     * @param string
-     *            {@link String} from which words are extracted
-     * @return {@link Map} which has key as size of words and value as number of words of that size
-     */
-    public Map<String, Long> fetchCountOfWordsBySize(String string) {
-        Map<String, Long> countOfWordsBySize = new LinkedHashMap<>();
-        String currentString = null;
-        StringTokenizer strToken = new StringTokenizer(string.replaceAll("[^a-zA-Z0-9 ]", ""));
-        while (strToken.hasMoreTokens()) {
-            currentString = strToken.nextToken();
-            if (currentString != null) {
-                currentString.length();
-                if (!countOfWordsBySize.containsKey(ntewc.convert(currentString.length()))) {
-                    countOfWordsBySize.put(ntewc.convert(currentString.length()), 1L);
-                } else {
-                    countOfWordsBySize.put(ntewc.convert(currentString.length()),
-                            countOfWordsBySize.get(ntewc.convert(currentString.length())) + 1);
-                }
-            }
-        }
-        currentString = null;
-        strToken = null;
-        return countOfWordsBySize;
-    }
-
-    /**
-     * Fetch count of words of all Sizes
-     * 
-     * @param string
-     *            Array of {@link String} from which words are to be extracted
-     * @return {@link Map} which has key as size of words and value as number of words of that size
-     */
-    public Map<String, Long> fetchCountOfWordsBySize(String[] string) {
-        return fetchCountOfWordsBySize(Arrays.toString(string));
     }
 
 }
