@@ -24,12 +24,12 @@ public class StringUtilsTest {
     @Test
     public void testFetchCountOfWordsBySize() {
         String[] string = { "Hello how are you?", "I am fine. How about you?", "Me too." };
-        Map<String, Long> map = stringUtils.fetchCountOfWordsBySize(string);
-        assertThat(1L, is(equalTo(map.get("one"))));
-        assertThat(2L, is(equalTo(map.get("two"))));
-        assertThat(6L, is(equalTo(map.get("three"))));
-        assertThat(1L, is(equalTo(map.get("four"))));
-        assertThat(2L, is(equalTo(map.get("five"))));
+        Map<Integer, Long> map = stringUtils.fetchCountOfWordsBySize(string);
+        assertThat(1L, is(equalTo(map.get(1))));
+        assertThat(2L, is(equalTo(map.get(2))));
+        assertThat(6L, is(equalTo(map.get(3))));
+        assertThat(1L, is(equalTo(map.get(4))));
+        assertThat(2L, is(equalTo(map.get(5))));
     }
 
     @Test

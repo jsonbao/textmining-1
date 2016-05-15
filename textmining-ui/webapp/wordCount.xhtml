@@ -84,7 +84,7 @@
 			<rich:dataTable
 				value="#{textMiningController.countOfWordsBySize.entrySet()}"
 				var="entry">
-				<rich:column headerClass="tableHeader">
+				<rich:column sortBy="#{entry.key}" headerClass="tableHeader">
 					<f:facet name="header">Word Size</f:facet>
 					<h:outputText value="#{entry.key}" title="#{entry.key}" />
 				</rich:column>

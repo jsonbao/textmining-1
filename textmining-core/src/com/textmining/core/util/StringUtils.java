@@ -3,7 +3,6 @@ package com.textmining.core.util;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -27,19 +26,18 @@ public class StringUtils {
      *            {@link String} from which words are extracted
      * @return {@link Map} which has key as size of words and value as number of words of that size
      */
-    public Map<String, Long> fetchCountOfWordsBySize(String string) {
-        Map<String, Long> countOfWordsBySize = new LinkedHashMap<>();
+    public Map<Integer, Long> fetchCountOfWordsBySize(String string) {
+        Map<Integer, Long> countOfWordsBySize = new TreeMap<>();
         String currentString = null;
         StringTokenizer strToken = new StringTokenizer(string.replaceAll("[^a-zA-Z0-9 ]", ""));
         while (strToken.hasMoreTokens()) {
             currentString = strToken.nextToken().toLowerCase();
             if (currentString != null) {
                 currentString.length();
-                if (!countOfWordsBySize.containsKey(ntewc.convert(currentString.length()))) {
-                    countOfWordsBySize.put(ntewc.convert(currentString.length()), 1L);
+                if (!countOfWordsBySize.containsKey(currentString.length())) {
+                    countOfWordsBySize.put(currentString.length(), 1L);
                 } else {
-                    countOfWordsBySize.put(ntewc.convert(currentString.length()),
-                            countOfWordsBySize.get(ntewc.convert(currentString.length())) + 1);
+                    countOfWordsBySize.put(currentString.length(), countOfWordsBySize.get(currentString.length()) + 1);
                 }
             }
         }
@@ -55,7 +53,7 @@ public class StringUtils {
      *            Array of {@link String} from which words are to be extracted
      * @return {@link Map} which has key as size of words and value as number of words of that size
      */
-    public Map<String, Long> fetchCountOfWordsBySize(String[] string) {
+    public Map<Integer, Long> fetchCountOfWordsBySize(String[] string) {
         return fetchCountOfWordsBySize(Arrays.toString(string));
     }
 

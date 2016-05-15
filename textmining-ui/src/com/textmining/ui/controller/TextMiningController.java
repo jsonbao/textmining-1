@@ -63,7 +63,7 @@ public class TextMiningController extends BaseController implements Serializable
         return barModel;
     }
 
-    public Map<String, Long> getCountOfWordsBySize() {
+    public Map<Integer, Long> getCountOfWordsBySize() {
         return stringUtils.fetchCountOfWordsBySize(getStringToBeTested());
     }
 
