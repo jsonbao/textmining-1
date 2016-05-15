@@ -127,3 +127,24 @@ table {
 	resize: none;
 	margin: auto;
 }
+
+.compareTextResult {
+	overflow: hidden;
+}
+
+#dictionaryOne, #dictionaryTwo, #commonDictionary {
+	float: left;
+	margin: 1%;
+}
+
+#dictionaryOne {
+	display: inline-block;
+}
+
+#dictionaryTwo {
+	
+}
+
+#commonDictionary {
+	
+}

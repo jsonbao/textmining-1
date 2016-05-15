@@ -27,4 +27,8 @@
 	<bean id="ntewc"
 		class="com.textmining.core.converters.NumberToEnglishWordsConverter" />
 
+	<bean id="stringUtilsCompare" class="com.textmining.core.util.StringUtilsCompare">
+		<property name="stringUtils" ref="stringUtils" />
+	</bean>
+
 </beans>

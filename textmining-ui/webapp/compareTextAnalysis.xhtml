@@ -32,15 +32,48 @@
 		</div>
 		<div class="oneLineButtons">
 			<h:commandButton value="Submit" id="submitButton"
-				disabled="#{empty compareAnalysisController.stringTwo}"
+				disabled="#{empty compareAnalysisController.stringOne and compareAnalysisController.stringTwo}"
 				action="#{compareAnalysisController.apply}"
 				styleClass="submit_button" />
 			<h:commandButton value="Reset" id="resetButton"
-				disabled="#{empty compareAnalysisController.stringTwo}"
-				action="#{compareAnalysisController.clear}"
+				disabled="#{empty compareAnalysisController.stringOne and compareAnalysisController.stringTwo}"
+				action="#{compareAnalysisController.reset}"
 				styleClass="reset_button" />
 		</div>
 	</h:form>
+	<h:panelGroup rendered="#{compareAnalysisController.result}"
+		layout="block" id="resultPanel" styleClass="compareTextResult">
+		<div id="dictionaryOne">
+			<rich:dataTable id="dictionaryOneTable" caseSensitiveSort="false"
+				value="#{compareAnalysisController.dictionaryOne.entrySet()}"
+				var="entry">
+				<rich:column sortBy="#{entry.value}" headerClass="tableHeader">
+					<f:facet name="header">Unique Words in Dictionary One</f:facet>
+					<h:outputText value="#{entry.value}" title="#{entry.value}" />
+				</rich:column>
+			</rich:dataTable>
+		</div>
+		<div id="dictionaryTwo">
+			<rich:dataTable id="dictionaryTwoTable" caseSensitiveSort="false"
+				value="#{compareAnalysisController.dictionaryTwo.entrySet()}"
+				var="entry">
+				<rich:column sortBy="#{entry.value}" headerClass="tableHeader">
+					<f:facet name="header">Unique Words in Dictionary Two</f:facet>
+					<h:outputText value="#{entry.value}" title="#{entry.value}" />
+				</rich:column>
+			</rich:dataTable>
+		</div>
+		<div id="commonDictionary">
+			<rich:dataTable id="commonDictionaryTable" caseSensitiveSort="false"
+				value="#{compareAnalysisController.similarWords.entrySet()}"
+				var="entry">
+				<rich:column sortBy="#{entry.value}" headerClass="tableHeader">
+					<f:facet name="header">Common Words in Both Dictionaries</f:facet>
+					<h:outputText value="#{entry.value}" title="#{entry.value}" />
+				</rich:column>
+			</rich:dataTable>
+		</div>
+	</h:panelGroup>
 
 </h:body>
 </html>
