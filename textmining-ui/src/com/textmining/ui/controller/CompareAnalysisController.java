@@ -7,7 +7,7 @@ import java.util.Set;
 
 import com.textmining.core.util.StringUtilsCompare;
 
-public class CompareAnalysisController {
+public class CompareAnalysisController extends BaseController {
 
     private Map<Integer, String> dictionaryOne;
 
@@ -25,6 +25,12 @@ public class CompareAnalysisController {
 
     public void apply() {
         ResourceBundle.clearCache();
+        if (getStringOne().trim().isEmpty()) {
+            error("Enter Text in the Left text area");
+        }
+        if (getStringTwo().trim().isEmpty()) {
+            error("Enter Text in the Right text area");
+        }
         if (!getStringOne().trim().isEmpty() && !getStringTwo().trim().isEmpty()) {
             result = true;
         }
@@ -79,8 +85,6 @@ public class CompareAnalysisController {
 
     public void reset() {
         result = false;
-        dictionaryOne.clear();
-        dictionaryTwo.clear();
         stringOne = "";
         stringTwo = "";
         ResourceBundle.clearCache();

@@ -23,6 +23,10 @@
 			styleClass="textAnalysisTextArea">
 			<f:ajax event="keyup" render="submitButton resetButton" />
 		</h:inputTextarea>
+		<div align="center" id="errors">
+			<h:messages layout="table"
+				style="align:center;color:red;margin:auto;" />
+		</div>
 		<div class="oneLineButtons">
 			<h:commandButton value="Submit" id="submitButton"
 				disabled="#{empty textMiningController.stringToBeTested}"

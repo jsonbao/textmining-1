@@ -20,31 +20,25 @@ import com.textmining.core.util.StringUtils;
 
 @ManagedBean
 @SessionScoped
-public class TextMiningController implements Serializable {
+public class TextMiningController extends BaseController implements Serializable {
 
     private static final long serialVersionUID = 8232953245163786969L;
 
-    private StringUtils stringUtils;
-
-    private POSUtil posUtil;
+    private BarChartModel barModel;
 
     private MapUtils mapUtils;
 
-    private String stringToBeTested = "";
+    private PieChartModel pieChartModel;
+
+    private POSUtil posUtil;
 
     private boolean showResult = false;
 
-    private BarChartModel barModel;
+    private String stringToBeTested = "";
+
+    private StringUtils stringUtils;
 
     private Long time;
-
-    private PieChartModel pieChartModel;
-
-    public void clear() {
-        showResult = false;
-        stringToBeTested = "";
-        ResourceBundle.clearCache();
-    }
 
     public void apply() {
         ResourceBundle.clearCache();
@@ -52,49 +46,88 @@ public class TextMiningController implements Serializable {
         if (!getStringToBeTested().trim().isEmpty()) {
             showResult = true;
             initBarModelForNumbeCount();
+        } else {
+            error("Enter text in the text area above");
         }
         Long end = System.currentTimeMillis();
         setTime(end - start);
     }
 
-    public Long getTotalWordCount() {
-        return stringUtils.totalWordCount(getStringToBeTested());
+    public void clear() {
+        showResult = false;
+        stringToBeTested = "";
+        ResourceBundle.clearCache();
+    }
+
+    public BarChartModel getBarModel() {
+        return barModel;
+    }
+
+    public Map<String, Long> getCountOfWordsBySize() {
+        return stringUtils.fetchCountOfWordsBySize(getStringToBeTested());
+    }
+
+    public MapUtils getMapUtils() {
+        return mapUtils;
     }
 
     public int getNumberOfSentences() {
         return stringUtils.numberOfSentences(getStringToBeTested());
     }
 
-    public Map<String, Long> getSimilarWordCount() {
-        return stringUtils.similarWordCount(getStringToBeTested());
-    }
-
-    public Map<String, String[]> getPosDetect() {
-        return posUtil.posDetect(getStringToBeTested());
+    public PieChartModel getPieChartModel() {
+        return pieChartModel;
     }
 
     public Map<String, Long> getPosCount() {
         return posUtil.numberOfSimilarPOS(getPosDetect());
     }
 
-    public Map<String, Long> getWordsOfSizeOne() {
-        return stringUtils.fetchWordsBasedOnSize(getStringToBeTested(), 1);
+    public Map<String, String[]> getPosDetect() {
+        return posUtil.posDetect(getStringToBeTested());
     }
 
-    public Map<String, Long> getWordsOfSizeTwo() {
-        return stringUtils.fetchWordsBasedOnSize(getStringToBeTested(), 2);
+    public POSUtil getPosUtil() {
+        return posUtil;
     }
 
-    public Map<String, Long> getWordsOfSizeThree() {
-        return stringUtils.fetchWordsBasedOnSize(getStringToBeTested(), 3);
+    public Map<String, Long> getSimilarWordCount() {
+        return stringUtils.similarWordCount(getStringToBeTested());
+    }
+
+    public String getStringToBeTested() {
+        return stringToBeTested;
+    }
+
+    /*
+     * Setters and Getters of Objects and Variables
+     */
+    public StringUtils getStringUtils() {
+        return stringUtils;
+    }
+
+    public Long getTime() {
+        return time;
+    }
+
+    public Long getTotalWordCount() {
+        return stringUtils.totalWordCount(getStringToBeTested());
     }
 
     public Map<String, Long> getWordsOfSizeFour() {
         return stringUtils.fetchWordsBasedOnSize(getStringToBeTested(), 4);
     }
 
-    public Map<String, Long> getCountOfWordsBySize() {
-        return stringUtils.fetchCountOfWordsBySize(getStringToBeTested());
+    public Map<String, Long> getWordsOfSizeOne() {
+        return stringUtils.fetchWordsBasedOnSize(getStringToBeTested(), 1);
+    }
+
+    public Map<String, Long> getWordsOfSizeThree() {
+        return stringUtils.fetchWordsBasedOnSize(getStringToBeTested(), 3);
+    }
+
+    public Map<String, Long> getWordsOfSizeTwo() {
+        return stringUtils.fetchWordsBasedOnSize(getStringToBeTested(), 2);
     }
 
     public void initBarModelForNumbeCount() {
@@ -129,71 +162,40 @@ public class TextMiningController implements Serializable {
         }
     }
 
-    /*
-     * Setters and Getters of Objects and Variables
-     */
-    public StringUtils getStringUtils() {
-        return stringUtils;
-    }
-
-    public POSUtil getPosUtil() {
-        return posUtil;
-    }
-
-    public MapUtils getMapUtils() {
-        return mapUtils;
-    }
-
-    public String getStringToBeTested() {
-        return stringToBeTested;
-    }
-
-    public BarChartModel getBarModel() {
-        return barModel;
-    }
-
-    public Long getTime() {
-        return time;
-    }
-
-    public PieChartModel getPieChartModel() {
-        return pieChartModel;
-    }
-
-    public void setPieChartModel(PieChartModel pieChartModel) {
-        this.pieChartModel = pieChartModel;
-    }
-
-    public void setTime(Long time) {
-        this.time = time;
+    public boolean isShowResult() {
+        return showResult;
     }
 
     public void setBarModel(BarChartModel barModel) {
         this.barModel = barModel;
     }
 
-    public boolean isShowResult() {
-        return showResult;
+    public void setMapUtils(MapUtils mapUtils) {
+        this.mapUtils = mapUtils;
     }
 
-    public void setStringUtils(StringUtils stringUtils) {
-        this.stringUtils = stringUtils;
+    public void setPieChartModel(PieChartModel pieChartModel) {
+        this.pieChartModel = pieChartModel;
     }
 
     public void setPosUtil(POSUtil posUtil) {
         this.posUtil = posUtil;
     }
 
-    public void setMapUtils(MapUtils mapUtils) {
-        this.mapUtils = mapUtils;
+    public void setShowResult(boolean showResult) {
+        this.showResult = showResult;
     }
 
     public void setStringToBeTested(String stringToBeTested) {
         this.stringToBeTested = stringToBeTested;
     }
 
-    public void setShowResult(boolean showResult) {
-        this.showResult = showResult;
+    public void setStringUtils(StringUtils stringUtils) {
+        this.stringUtils = stringUtils;
+    }
+
+    public void setTime(Long time) {
+        this.time = time;
     }
 
 }

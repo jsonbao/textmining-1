@@ -15,13 +15,13 @@
 <h:body styleClass="body">
 	<ui:include src="/resources/templates/header.xhtml" />
 
-	<h:form styleClass="compareform">
+	<h:form styleClass="compareform" id="compareText">
 		<div id="twoTextArea">
 			<h:inputTextarea id="stringOne"
 				requiredMessage="Text required in the box"
 				value="#{compareAnalysisController.stringOne}" cols="100" rows="10"
 				styleClass="compareformTextArea1">
-				<f:ajax event="keyup" render="stringTwo" />
+				<f:ajax event="keyup" render="submitButton resetButton" />
 			</h:inputTextarea>
 			<h:inputTextarea id="stringTwo"
 				requiredMessage="Text required in the box"
@@ -30,13 +30,17 @@
 				<f:ajax event="keyup" render="submitButton resetButton" />
 			</h:inputTextarea>
 		</div>
+		<div align="center" id="errors">
+			<h:messages layout="table"
+				style="align:center;color:red;margin:auto;" />
+		</div>
 		<div class="oneLineButtons">
 			<h:commandButton value="Submit" id="submitButton"
-				disabled="#{empty compareAnalysisController.stringOne and compareAnalysisController.stringTwo}"
+				disabled="#{empty compareAnalysisController.stringOne and empty compareAnalysisController.stringTwo}"
 				action="#{compareAnalysisController.apply}"
 				styleClass="submit_button" />
 			<h:commandButton value="Reset" id="resetButton"
-				disabled="#{empty compareAnalysisController.stringOne and compareAnalysisController.stringTwo}"
+				disabled="#{empty compareAnalysisController.stringOne and empty compareAnalysisController.stringTwo}"
 				action="#{compareAnalysisController.reset}"
 				styleClass="reset_button" />
 		</div>
