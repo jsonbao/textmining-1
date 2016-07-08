@@ -5,7 +5,12 @@
 	<groupId>com.textmining</groupId>
 	<artifactId>textmining</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>textmining-core</module>
+		<module>textmining-ui</module>
+	</modules>
 
 	<name>textmining-parent</name>
 	<url>http://maven.apache.org</url>
