@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/spdeepak/textmining.svg?branch=master)](https://travis-ci.org/spdeepak/textmining)
 [![Coverage Status](https://coveralls.io/repos/github/spdeepak/textmining/badge.svg?branch=master)](https://coveralls.io/github/spdeepak/textmining?branch=master)
+[![Build status](https://ci.appveyor.com/api/projects/status/nuybt2pa92ao0d3n?svg=true)](https://ci.appveyor.com/project/spdeepak/textmining)
 
 
 # Text Mining
